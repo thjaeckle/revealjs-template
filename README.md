@@ -1,6 +1,6 @@
-# revealjs-template
+# Slides of Thomas Jäckle, done with reveal.js
 
-After creating a new repository from this template, init and update the `reveal.js` submodule:
+Init and update the `reveal.js` submodule:
 ```shell
 git submodule init
 git submodule update
