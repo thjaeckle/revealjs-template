@@ -1,0 +1,133 @@
+@font-face {
+    font-family: "News Cycle";
+}
+
+#header-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 1 !important;
+}
+#header-left img {
+    width: 80px;
+    padding-top: 0;
+    padding-left: 20px
+}
+
+#header-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 1 !important;
+}
+#header-right img {
+    width: 120px;
+    padding-top: 0;
+    padding-right: 20px
+}
+
+.reveal section img {
+    background: none;
+    border: none;
+    box-shadow: none;
+}
+
+.dim-background .slide-background {
+    opacity: 0.3 !important;
+}
+
+.chapter-background .slide-background .slide-background-content {
+    opacity: 0.4 !important;
+}
+
+.pdf-page .reveal .slide-background .slide-background-content {
+    opacity: 0.7 !important;
+}
+
+.pdf-page #header-left img {
+    width: 50%;
+    padding-left: 0;
+}
+.pdf-page #header-right img {
+    width: 50%;
+    padding-right: 0;
+}
+.pdf-page .dim-background .slide-background {
+    background: none !important;
+}
+.pdf-page .slide-background .slide-background-content {
+    background: none !important;
+}
+
+.dim-background .slide-background.past {
+    display: none !important;
+}
+
+.dim-background .slide-background.future {
+    display: none !important;
+}
+
+.chapter-background .slide-background.past {
+    display: none !important;
+}
+
+.chapter-background .slide-background.future {
+    display: none !important;
+}
+
+/*.new-chapter h3 { color: #586e75; }*/
+.introlink a:link {
+    font-weight: bold;
+    color: #000000
+}
+
+/* unvisited links */
+.introlink a:visited {
+    font-weight: bold;
+    color: #000000
+}
+
+/* visited links   */
+.introlink a:hover {
+    font-weight: bold;
+    color: #000000
+}
+
+/* user hovers     */
+.introlink a:active {
+    font-weight: bold;
+    color: #000000
+}
+
+ul {
+    list-style: none !important;
+}
+
+ul li {
+    padding-left: 1.3em;
+}
+
+ul li:before {
+    list-style: none;
+    content: "→";
+    display: inline-block;
+    margin-left: -1.3em; /* same as padding-left set on li */
+    width: 1.3em; /* same as padding-left set on li */
+}
+
+.footer {
+    font-size: 12px !Important;
+    font-family: "News Cycle", Impact, sans-serif;
+    color: #687175;
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    margin-bottom: 10px
+}
+
+.footer a {
+    color: #003b6a;
+    text-decoration: none;
+}
+
+/* active links    */
