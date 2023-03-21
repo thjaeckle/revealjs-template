@@ -32,10 +32,165 @@
 	<div class="slides">
 		<section>
 			<section id="title" class="new-chapter">
-				<h1 style="margin-top: 0.6em; font-size: 2em;">WoT (Web of Things)<br/>-<br/>distilled</h1>
-				<h2 style="margin-top: 1.5em; font-size: 0.8em">23.03.2023 @ 2nd bxEVENT</h2>
+				<h1><img src="images/wot-logo-large-blue.svg" style="width: 35%;vertical-align: middle" alt="Web of Things"></h1>
+				<h2>distilled</h2>
+				<h3 style="margin-top: 1.5em; font-size: 0.8em">23.03.2023 @ 2nd bxEVENT</h3>
 			</section>
 		</section>
+
+		<section style="clear: both;">
+			<section id="evolution-of-devices-intro" class="new-chapter">
+				<h1>Evolution of devices</h1>
+				<br/>
+				<!-- img source: https://mafrome.org/new-structured-email-addresses/59774943-human-evolution-computer-time-illustration/ -->
+				<img src="images/evolution-of-man-pc.jpg" style="padding-right: 0" alt="Evolution">
+			</section>
+			<section id="evolution-of-devices" style="clear: both;">
+				<div style="float: left; width: 40%">
+					<div class="r-stack">
+						<div data-fragment-index="0" style="padding-bottom: 800px">
+							<img src="images/thermostat-10.png" style="padding-right: 0" width="100" alt="Device 1.0">
+						</div>
+						<div class="fragment" data-fragment-index="1" style="padding-bottom: 650px; padding-top: 150px; clear: both;">
+							<img src="images/tado.png" style="padding-right: 90px" width="120" alt="Device 2.0">
+						</div>
+						<div class="fragment" data-fragment-index="2" style="padding-bottom: 400px; padding-top: 200px; clear: both;">
+							<img src="images/api.jpg" style="padding-right: 130px" width="200" alt="Device 3.0">
+						</div>
+						<div class="fragment" data-fragment-index="3" style="padding-bottom: 150px; padding-top: 300px; clear: both;">
+							<img src="images/wot-logo-large-blue.svg" style="padding-right: 300px" width="180" alt="Device 4.0">
+						</div>
+					</div>
+				</div>
+				<div style="text-align: left; float: right; width: 60%">
+					<div class="r-stack">
+						<!-- meme generator: https://imgflip.com/memegenerator/Expanding-Brain -->
+						<img data-fragment-index="0" src="images/brain-meme-1.png" width="480" style="padding-bottom: 571px">
+						<img class="fragment" data-fragment-index="1" src="images/brain-meme-2.png" width="480" style="padding-bottom: 400px">
+						<img class="fragment" data-fragment-index="2" src="images/brain-meme-3.png" width="480" style="padding-bottom: 243px">
+						<img class="fragment" data-fragment-index="3" src="images/brain-meme.jpg" width="480" style="padding-bottom: 67px">
+					</div>
+				</div>
+			</section>
+		</section>
+
+		<section>
+			<section id="wot-into" class="new-chapter">
+				<h1>What is the WoT?</h1>
+				<br/>
+				<img src="images/wot-logo-large-blue.svg" style="" width="300" alt="WoT">
+			</section>
+			<section id="wot-info">
+				<h3>Web of Things</h3>
+				<ul>
+					<li><strong>W3C</strong>
+						<ul>
+							<li>was founded by Tim Berners-Lee, inventor of the WWW</li>
+							<li class="fragment">established standards like:<br/>HTML, CSS, SOAP, XML, RDF, JSON-LD, ..</li>
+						</ul>
+					</li>
+					<li class="fragment" style="padding-top: 0.8em">WoT is a <strong>working group</strong> at the W3C</li>
+					<li class="fragment" style="padding-top: 0.8em">seeks to <strong>counter the
+						fragmentation</strong> of the <strong>IoT</strong> by <strong>using</strong> and extending
+						<strong>existing</strong>, standardized <strong>Web technologies</strong></li>
+				</ul>
+			</section>
+			<section id="wot-distilled">
+				<img src="images/tado.png" style="padding-right: 90px; float:left" width="150" alt="tado SRT">
+				<p><em>"reveal your capabilities"</em></p>
+				<img src="images/fairy.svg" style="float:right" width="300" alt="fairy">
+				<!-- img src: https://freesvg.org/young-smiling-fairy-girl-vector-image -->
+				<br/>
+				<br/>
+				<br/>
+				<p style="padding-right: 80px; text-align: left">sure, here you are ..</p>
+				<ul style="padding-right: 50px">
+					<li>my <strong>properties</strong> are ..</li>
+					<li>you can invoke <strong>actions</strong> ..</li>
+					<li>I emit following <strong>events</strong> ..</li>
+				</ul>
+			</section>
+			<section id="wot-distilled-1">
+				<h3>properties</h3>
+
+			</section>
+			<section id="wot-distilled-2">
+				<h3>WoT embraces reuse</h3>
+				<img src="images/jsonschema.png" width="400" />
+				<img src="images/http-logo.png" width="200" style="padding-right: 50px" />
+				<img src="images/rdf.png" width="200" />
+				<img src="images/json-ld-1468496834.jpg" width="300" />
+				<img src="images/oauth2.jpg" width="200" />
+				<img src="images/mqtt-logo.png" width="200" />
+				<img src="images/CoAP.png" width="200" />
+			</section>
+		</section>
+
+		<section>
+			<section id="wot-and-dt-intro" class="new-chapter">
+				<h1>WoT +<br/>Digital Twins</h1>
+				<br/>
+				<img src="images/heart-puzzle.png" style="width: 40%" alt="heart puzzle">
+				<!-- img source:  https://www.aboutliving.co.uk/products/metalmorphose-heart-puzzle-keyring-2-piece -->
+			</section>
+			<section id="wot-and-dt-1">
+				<ul>
+					<li>WoT assumes that each device can describe its
+						<ul>
+							<li>capabilities</li>
+							<li>data formats</li>
+							<li>supported protocols</li>
+							<li>auth* mechanisms</li>
+							<li>endpoints</li>
+						</ul>
+					</li>
+					<li class="fragment" style="padding-top: 0.8em">not viable for "simple" devices</li>
+					<li class="fragment" style="padding-top: 0.8em">not viable for existing devices</li>
+				</ul>
+			</section>
+			<section id="wot-and-dt-2">
+				<h3>Solution</h3>
+				<div style="float: left; width: 30%">
+					<img src="images/ditto.svg" width="130" style="float: left; padding-left: 3em" alt="Ditto">
+				</div>
+				<div style="float: left; width: 70%">
+					<p>has you covered - let the device's digital twin provide WoT description</p>
+				</div>
+				<div style="float: right; width: 10%">
+					<img class="fragment" data-fragment-index="2" src="images/fairy.svg" width="90" alt="fairy">
+				</div>
+				<div style="float: left; width: 90%">
+					<pre class="fragment" data-fragment-index="3" style="width: 100%; font-size: 0.4em;margin-bottom: 0.3em"><code class="hljs bash">curl -u ditto:ditto \
+		'https://ditto.eclipseprojects.io/api/2/things/io.eclipseprojects.ditto:floor-lamp-0815' \
+		-H 'Accept: application/td+json'</code></pre>
+
+					<pre class="fragment" data-fragment-index="4" style="width: 100%; font-size: 0.28em;margin-top: 0.2em"><code class="hljs json">{
+  @context":["https://www.w3.org/2022/wot/td/v1.1", ...],
+  "title":"Floor Lamp",
+  "@type":"Thing",
+  "id":"urn:io.eclipseprojects.ditto:floor-lamp-0815",
+  "base":"https://ditto.eclipseprojects.io/api/2/things/io.eclipseprojects.ditto:floor-lamp-0815",
+  "version":{"model":"1.0.0","instance":"1.0.0"},
+  "links":[{
+    "rel":"type",
+    "href":"https://eclipse-ditto.github.io/ditto-examples/wot/models/floor-lamp-1.0.0.tm.jsonld",
+    "type":"application/tm+json"
+   },{
+    "rel":"item",
+    "type":"application/td+json",
+    "href":"/features/Spot1"
+   },...],
+   "security":"basic_sc",
+   "securityDefinitions":{"basic_sc":{"in":"header","scheme":"basic"}},
+   "forms":[{"op":"readallproperties","href":"/attributes{?channel,timeout}","htv:methodName":"GET","contentType":"application/json"
+  ...
+}</code></pre>
+				</div>
+
+
+			</section>
+		</section>
+
 	</div>
 </div>
 
