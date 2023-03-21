@@ -35,6 +35,11 @@
 				<h1><img src="images/wot-logo-large-blue.svg" style="width: 35%;vertical-align: middle" alt="Web of Things"></h1>
 				<h2>distilled</h2>
 				<h3 style="margin-top: 1.5em; font-size: 0.8em">23.03.2023 @ 2nd bxEVENT</h3>
+				<hr />
+				<small class="introlink">by <a
+					href="mailto:thomas.jaeckle@beyonnex.io">Thomas Jäckle</a> (<a
+					href="https://twitter.com/thjaeckle">@thjaeckle</a>)
+				</small>
 			</section>
 		</section>
 
@@ -81,15 +86,15 @@
 				<img src="images/wot-logo-large-blue.svg" style="" width="300" alt="WoT">
 			</section>
 			<section id="wot-info">
-				<h3>Web of Things</h3>
+				<h2>Web of Things</h2>
 				<ul>
-					<li><strong>W3C</strong>
+					<li>WoT is a <strong>working group</strong> at the W3C</li>
+					<li class="fragment" style="padding-top: 0.8em">the <strong>W3C</strong>
 						<ul>
 							<li>was founded by Tim Berners-Lee, inventor of the WWW</li>
 							<li class="fragment">established standards like:<br/>HTML, CSS, SOAP, XML, RDF, JSON-LD, ..</li>
 						</ul>
 					</li>
-					<li class="fragment" style="padding-top: 0.8em">WoT is a <strong>working group</strong> at the W3C</li>
 					<li class="fragment" style="padding-top: 0.8em">seeks to <strong>counter the
 						fragmentation</strong> of the <strong>IoT</strong> by <strong>using</strong> and extending
 						<strong>existing</strong>, standardized <strong>Web technologies</strong></li>
@@ -103,27 +108,95 @@
 				<br/>
 				<br/>
 				<br/>
-				<p style="padding-right: 80px; text-align: left">sure, here you are ..</p>
-				<ul style="padding-right: 50px">
+				<p class="fragment" data-fragment-index="0" style="padding-right: 80px; text-align: left">sure, here you are ..</p>
+				<ul class="fragment" data-fragment-index="0" style="padding-right: 50px">
 					<li>my <strong>properties</strong> are ..</li>
 					<li>you can invoke <strong>actions</strong> ..</li>
 					<li>I emit following <strong>events</strong> ..</li>
 				</ul>
 			</section>
 			<section id="wot-distilled-1">
-				<h3>properties</h3>
+				<h2>examples</h2>
+				<div style="float: left; width: 50%">
+					<h3>properties</h3>
+					<pre style="width: 100%; font-size: 0.32em;margin-top: 0.2em; margin-right: 0.2em"><code class="hljs json">{ // ...
+  "properties": {
+    "on": {
+        "type": "boolean",
+        "forms": [{
+          "op": "writeproperty",
+          "href": "https://myt.example.com:5683/temp",
+          "contentType": "application/json",
+          "htv:methodName": "POST"
+        }]
+    },
+    "status": {
+      "type": "object",
+      "properties": {
+        "brightness": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 100.0
+        },
+        "rgb": {
+          "type": "array", // ...
+        }
+      },
+      "required": ["brightness", "rgb"],
+      "forms": [...]
+    }
+  }, // ...
+}</code></pre>
+				</div>
+				<div class="fragment" style="float: left; width: 50%">
+					<h3>actions</h3>
+					<pre style="width: 100%; font-size: 0.32em;margin-top: 0.2em; margin-left: 0.2em"><code class="hljs json">{ // ...
+  "actions": {
+    "fade": {
+      "title": "Fade in/out",
+      "description": "Smooth fade in and out.",
+      "input": {
+        "type": "object",
+        "properties": {
+          "from": {
+              "type": "integer",
+              "minimum": 0,"maximum": 100
+          },
+          "to": {
+              "type": "integer",
+              "minimum": 0,"maximum": 100
+          },
+          "duration": {"type": "number"}
+        },
+        "required": ["to","duration"]
+		  },
+      "output": {"type": "string"},
+      "forms": [{
+        "op": "invokeaction",
+        "href": "https://cam.example.com/api/snapshot",
+        "contentType": "application/json",
+				"htv:methodName": "POST",
+        "response": {
+          "contentType": "image/jpeg"
+        }
+      }]
+   	}
+  }, // ...
+}</code></pre>
+				</div>
+
 
 			</section>
-			<section id="wot-distilled-2">
-				<h3>WoT embraces reuse</h3>
-				<img src="images/jsonschema.png" width="400" />
-				<img src="images/http-logo.png" width="200" style="padding-right: 50px" />
-				<img src="images/rdf.png" width="200" />
-				<img src="images/json-ld-1468496834.jpg" width="300" />
-				<img src="images/oauth2.jpg" width="200" />
-				<img src="images/mqtt-logo.png" width="200" />
-				<img src="images/CoAP.png" width="200" />
-			</section>
+<!--			<section id="wot-distilled-2">-->
+<!--				<h3>WoT embraces reuse</h3>-->
+<!--				<img src="images/jsonschema.png" width="400" />-->
+<!--				<img src="images/http-logo.png" width="200" style="padding-right: 50px" />-->
+<!--				<img src="images/rdf.png" width="200" />-->
+<!--				<img src="images/json-ld-1468496834.jpg" width="300" />-->
+<!--				<img src="images/oauth2.jpg" width="200" />-->
+<!--				<img src="images/mqtt-logo.png" width="200" />-->
+<!--				<img src="images/CoAP.png" width="200" />-->
+<!--			</section>-->
 		</section>
 
 		<section>
@@ -134,6 +207,7 @@
 				<!-- img source:  https://www.aboutliving.co.uk/products/metalmorphose-heart-puzzle-keyring-2-piece -->
 			</section>
 			<section id="wot-and-dt-1">
+				<h2>WoT issues</h2>
 				<ul>
 					<li>WoT assumes that each device can describe its
 						<ul>
@@ -149,7 +223,7 @@
 				</ul>
 			</section>
 			<section id="wot-and-dt-2">
-				<h3>Solution</h3>
+				<h2>Solution</h2>
 				<div style="float: left; width: 30%">
 					<img src="images/ditto.svg" width="130" style="float: left; padding-left: 3em" alt="Ditto">
 				</div>
@@ -160,34 +234,43 @@
 					<img class="fragment" data-fragment-index="2" src="images/fairy.svg" width="90" alt="fairy">
 				</div>
 				<div style="float: left; width: 90%">
-					<pre class="fragment" data-fragment-index="3" style="width: 100%; font-size: 0.4em;margin-bottom: 0.3em"><code class="hljs bash">curl -u ditto:ditto \
-		'https://ditto.eclipseprojects.io/api/2/things/io.eclipseprojects.ditto:floor-lamp-0815' \
-		-H 'Accept: application/td+json'</code></pre>
+					<pre class="fragment" data-fragment-index="3" style="width: 100%; font-size: 0.4em;margin-bottom: 0.3em"><code class="hljs bash">curl -u ditto:ditto -H 'Accept: application/td+json' \
+		'https://ddm-api-dev.beyonnex.org/ditto/api/2/things/io.beyonnex:srt-0815'</code></pre>
 
-					<pre class="fragment" data-fragment-index="4" style="width: 100%; font-size: 0.28em;margin-top: 0.2em"><code class="hljs json">{
+					<pre class="fragment" data-fragment-index="4" style="width: 100%; font-size: 0.3em;margin-top: 0.2em"><code class="hljs json">{
   @context":["https://www.w3.org/2022/wot/td/v1.1", ...],
-  "title":"Floor Lamp",
+  "title":"Smart Room Thermostat",
   "@type":"Thing",
-  "id":"urn:io.eclipseprojects.ditto:floor-lamp-0815",
-  "base":"https://ditto.eclipseprojects.io/api/2/things/io.eclipseprojects.ditto:floor-lamp-0815",
+  "id":"urn:io.beyonnex:srt-0815",
+  "base":"https://ddm-api-dev.beyonnex.org/ditto/api/2/things/io.beyonnex:srt-0815",
   "version":{"model":"1.0.0","instance":"1.0.0"},
   "links":[{
     "rel":"type",
-    "href":"https://eclipse-ditto.github.io/ditto-examples/wot/models/floor-lamp-1.0.0.tm.jsonld",
+    "href":"https://some-public.website.org/wot/models/srt-1.0.0.tm.jsonld",
     "type":"application/tm+json"
-   },{
-    "rel":"item",
-    "type":"application/td+json",
-    "href":"/features/Spot1"
    },...],
-   "security":"basic_sc",
-   "securityDefinitions":{"basic_sc":{"in":"header","scheme":"basic"}},
-   "forms":[{"op":"readallproperties","href":"/attributes{?channel,timeout}","htv:methodName":"GET","contentType":"application/json"
+   "security":"oauth2_sc",
+   "securityDefinitions":{"oauth2_sc":{"scheme": "oauth2","flow":"code","authorization":"...",...}},
+   "forms":[{"op":"readallproperties","href":"/attributes","htv:methodName":"GET","contentType":"application/json"}],
+	 "properties": {...},
+	 "actions": {...},
+	 "events": {...}
   ...
 }</code></pre>
 				</div>
+			</section>
+		</section>
 
-
+		<section>
+			<section id="conclusion" class="new-chapter">
+				<h2>Conclusion</h2>
+				<p>WoT is all about improved <strong>interoperability</strong></p>
+				<ul>
+					<li>of different devices</li>
+					<li>across different vendors</li>
+					<li>between partners</li>
+				</ul>
+				<img class="fragment" src="images/meme-friends-iot-standards.jpg" style="width: 50%" alt="friends">
 			</section>
 		</section>
 
