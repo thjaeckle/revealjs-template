@@ -283,11 +283,33 @@
 <script src="../reveal.js/plugin/highlight/highlight.js"></script>
 <script src="../reveal.js/plugin/zoom/zoom.js"></script>
 <script>
+	function getParameterByName(name, url) {
+		if (!url) {
+			url = window.location.href;
+		}
+		name = name.replace(/[\[\]]/g, "\\$&");
+		var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+			results = regex.exec(url);
+		if (!results) {
+			return null;
+		}
+		if (!results[2]) {
+			return '';
+		}
+		return decodeURIComponent(results[2].replace(/\+/g, " "));
+	}
+
 	// More info about initialization & config:
 	// - https://revealjs.com/initialization/
 	// - https://revealjs.com/config/
 	Reveal.initialize({
 											hash: true,
+											controls: true,
+											progress: true,
+											history: true,
+											center: true,
+											fragments: getParameterByName('fragments') === '', // only use "fragments" feature if queryParam 'fragments' is present
+											slideNumber: 'h.v',
 
 											// Learn about plugins: https://revealjs.com/plugins/
 											plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom ]
