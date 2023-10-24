@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Knowledge Nugget: Ditto Connections</title>
+
+	<meta name="description" content="Knowledge Nugget: Ditto Connections">
+	<meta name="author" content="Thomas Jäckle">
+	<meta name="date" content="2023-07-13">
+	<meta http-equiv="content-language" content="en">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<link rel="stylesheet" href="../font-awesome/css/all.min.css">
+
+	<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+	<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+	<!--		<link rel="stylesheet" href="../reveal.js/dist/theme/league.css">-->
+	<link rel="stylesheet" href="../reveal.js/dist/theme/white.css">
+	<link rel="stylesheet" href="../css/custom.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css">
+</head>
+<body>
+<div class="reveal">
+	<div class="slides">
+		<section>
+			<section id="title" class="new-chapter" data-background="./images/ditto_symbolonly.svg" data-background-size="70%" data-state="chapter-background">
+				<h1 style="font-size: 2.2em">Knowledge Nugget</h1>
+				<br/>
+				<h2>Ditto:<br/>Connections</h2>
+				<h3>and how to provide facades to external APIs via Ditto</h3>
+				<h3 style="margin-top: 1.5em; font-size: 0.8em">24.10.2023 @ beyonnex.io</h3>
+				<hr />
+				<small class="introlink">by <a
+					href="mailto:thomas.jaeckle@beyonnex.io">Thomas Jäckle</a> (<a
+					href="https://twitter.com/thjaeckle">@thjaeckle</a>)
+				</small>
+			</section>
+		</section>
+
+		<!-- Section: Ditto -->
+		<section style="clear: both;">
+			<section id="ditto-1" style="clear: both;">
+				<h2>Eclipse Ditto in context</h2>
+				<div style="text-align: left; float: left; width: 65%">
+					<img src="./images/ditto-in-action-2020.png" style="width: 90%;padding-top:0.5em" alt="Ditto in action"/>
+				</div>
+				<div style="text-align: left; float: right; width: 35%">
+					<p style="padding-top:3.5em; text-align: center">Ditto as<br/>IoT<br/>and/or <br/>Digital Twin<br/> "middleware"</p>
+				</div>
+			</section>
+			<section id="ditto-1-b" style="clear: both;">
+				<h2>recap: device data as APIs</h2>
+				<div style="text-align: left; float: left; width: 35%">
+                <pre style="width: 100%; font-size: 0.45em;"><code class="hljs json">{
+  "thingId": "io.beyonnex.srt:my-srt",
+  "policyId": "io.beyonnex.room:my-room",
+  "attributes": {
+    "serial": "4711-0815",
+    "location": {
+      "buildingId": "nice-building"
+    }
+  },
+  "features": {
+    "temp": {
+      "properties": {
+        "value": 23.42
+      }
+    }
+  }
+}</code></pre>
+					<p style="text-align: center">JSON repr. of a Thing</p>
+				</div>
+				<div style="text-align: left; float: right; width: 64%" class="fragment">
+                    <pre style="width: 105%; font-size: 0.45em;"><code class="hljs text">GET/PUT/PATCH/DELETE /things/io.beyonnex.srt:my-srt
+ /things/io.beyonnex.srt:my-srt/thingId
+ /things/io.beyonnex.srt:my-srt/policyId
+ /things/io.beyonnex.srt:my-srt/attributes
+ /things/io.beyonnex.srt:my-srt/attributes/serial
+ /things/io.beyonnex.srt:my-srt/attributes/location
+ /things/io.beyonnex.srt:my-srt/attributes/location/buildingId
+
+
+ /things/io.beyonnex.srt:my-srt/features
+ /things/io.beyonnex.srt:my-srt/features/temp
+ /things/io.beyonnex.srt:my-srt/features/temp/properties
+ /things/io.beyonnex.srt:my-srt/features/temp/properties/value
+
+
+
+
+</code></pre>
+					<p style="text-align: center">HTTP API of the Thing</p>
+					<a href="https://www.eclipse.dev/ditto/httpapi-concepts.html#endpoints" style="float: right; font-size: 0.7em">→ docs</a>
+				</div>
+			</section>
+			<section id="ditto-2" style="clear: both;">
+				<h2>in a nutshell</h2>
+				<br/>
+				<img src="images/ditto-super-1.png" alt="Ditto supergraphic">
+			</section>
+		</section>
+
+		<!-- Section: Connections -->
+		<section style="clear: both;">
+			<section id="connections-1" style="clear: both;">
+				<h2>let's talk about "connections"</h2>
+				<br/>
+				<div style="text-align: left; float: left; width: 45%">
+					<p>Ditto provides <b>persistence</b> and <b>APIs</b> to manage <b>Connections</b></p>
+				</div>
+				<div class="fragment" style="text-align: left; float: right; width: 53%">
+					<img src="images/ditto-connection-types.png" alt="Ditto connection types">
+				</div>
+			</section>
+			<section id="connections-2" style="clear: both;">
+				<h2>use cases</h2>
+				<ul>
+					<li>provide connectivity to <b>IoT devices</b>
+						<ul>
+							<li>abstracting from different IoT protocols</li>
+							<li>transforming payloads</li>
+						</ul>
+					</li>
+					<li class="fragment" style="margin-top: 0.5em;">as <b>IoT middleware</b>, provide <b>integration</b> with existing
+						IT landscape and external systems, e.g.:
+						<ul>
+							<li class="fragment">building up sensor timeseries in a TSDB</li>
+							<li class="fragment">copying data to a datalake</li>
+							<li class="fragment">providing facade for other HTTP APIs</li>
+							<li class="fragment">transforming payloads</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<section id="connections-3" style="clear: both;">
+				<h2>features</h2>
+				<ul>
+					<li>Ditto <code style="background: lightgrey">connectivity</code> takes care of
+						<ul>
+							<li>connection establishment</li>
+							<li class="fragment">reliably <b>reconnecting</b> upon reset</li>
+							<li class="fragment"><b>transforming payloads</b>, even executing dynamic JS based mappers</li>
+							<li class="fragment">qos (e.g. "at least once" processing)</li>
+							<li class="fragment">consumption <b>throttling</b></li>
+							<li class="fragment">providing metrics, logs</li>
+							<li class="fragment">stuff like SSH tunneling,<br/>for HTTP: OAuth2.0 auth, HMAC signing</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+		</section>
+
+		<!-- Section: Facade -->
+		<section style="clear: both;">
+			<section id="facade-1" style="clear: both;">
+				<h2>facade to external APIs</h2>
+				<p>example of HTTP APIs</p>
+				<img src="images/ditto-connection-http-facade.drawio.png" style="width: 90%;padding-top:0.5em" alt="Facade to other APIs">
+			</section>
+			<section id="facade-2" style="clear: both;">
+				<h2>Ditto brokers messages</h2>
+				<div style="text-align: left; float: left; width: 35%">
+					<img src="images/ditto-messages.png" alt="Ditto messages">
+				</div>
+				<div style="text-align: left; float: right; width: 65%">
+					<ul>
+						<li>e.g. <b>directly</b> providing <b>HTTP</b> and <b>WebSocket</b> APIs</li>
+						<li class="fragment">invocation of other HTTP (but also AMQP, Kafka) based APIs</li>
+					</ul>
+				</div>
+				<ul>
+					<li class="fragment">correlating responses back to requests</li>
+					<li class="fragment">but also: abstracting API invocation via other protocols (e.g. invoke MQTT API via HTTP)</li>
+					<li class="fragment">propagating "Trace context"</li>
+				</ul>
+			</section>
+			<section id="facade-3" style="clear: both;">
+				<h2>facade for public/ext APIs</h2>
+				<img src="images/ditto-connection-http-facade-external.png" style="width: 50%;" alt="Ditto connection facade external APIs">
+				<p>Benefits:</p>
+				<ul>
+					<li>enhancing "digital twin" with other service's offerings</li>
+					<li class="fragment">providing the "context" of the thing to enhance API call</li>
+					<li class="fragment">transforming payload to what external API needs</li>
+				</ul>
+			</section>
+			<section id="facade-4" style="clear: both;">
+				<h2>facade for internal APIs</h2>
+				<img src="images/ditto-connection-http-facade-internal.png" style="width: 50%;" alt="Ditto connection facade internal APIs">
+				<p>Benefits:</p>
+				<ul>
+					<li>internal APIs do not need to provide own auth*</li>
+					<li class="fragment">access control fully enforced by Ditto</li>
+					<li class="fragment">foster use "microservices" pattern providing single aspects (e.g. also AWS lambda)</li>
+				</ul>
+			</section>
+		</section>
+
+		<!-- Section: Mapping -->
+		<section style="clear: both;">
+			<section id="mapping-1" style="clear: both;">
+				<h2>mapping / transformation</h2>
+				<div style="text-align: left; float: left; width: 45%">
+					<ul>
+						<li style="margin-top: 0.5em;">devices should not be required to be aware of Ditto</li>
+						<li class="fragment" style="margin-top: 0.5em;">other backends define their API payloads</li>
+					</ul>
+				</div>
+				<div class="fragment" style="text-align: left; float: right; width: 53%">
+					<!-- img src: https://pokemongohub.net/post/guide/how-does-shiny-ditto-work-in-pokemon-go/ -->
+					<img src="images/ditto-pokemon-changes.png" style="width: 100%;" alt="Ditto pokemon changes">
+				</div>
+			</section>
+			<section id="mapping-2" style="clear: both;">
+				<h2>what can ditto transform?</h2>
+				<ul>
+					<li><b>protocol headers:</b>
+						<ul>
+							<li>accessing <a href="https://eclipse.dev/ditto/basic-placeholders.html">placeholders</a> to inject in headers</li>
+							<li class="fragment">mapping protocol header from consumed messages to internal headers</li>
+							<li class="fragment">e.g. HTTP headers, Kafka message headers, MQTT user properties</li>
+						</ul>
+					</li>
+					<li class="fragment"><b>message payloads:</b>
+						<ul>
+							<li class="fragment">using existing payload mappers</li>
+							<li class="fragment">using dynamic JS-based payload mapper, providing own mapping script</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<section id="mapping-2-a" style="clear: both;">
+				<h2>header mapping: placeholders</h2>
+				<pre style="width: 120%; font-size: 0.65em; margin-left:-10%"><code class="hljs">{{ thing:id }} 									# affected (e.g. modified) thing id
+{{ feature:id }} 								# affected feature id
+{{ header:[header-name] }}  		# internal or external header value, depending on which "direction" of mapping
+{{ topic:full }}								# the full Ditto Protocol topic, e.g.: io.beyonnex/srt-123/things/twin/events/merged
+{{ topic:entityName }}					# the entity name of the Ditto Protocol topic, e.g.: srt-123
+{{ topic:action }}							# the action of the Ditto Protocol topic, e.g.: merged
+{{ thing-json:[json-pointer] }}	# the content of the JSON field in the affected thing, identified by the JSON pointer
+{{ time:now }}									# the current timestamp in ISO-8601 format</code>
+				</pre>
+			</section>
+			<section id="mapping-2-b" style="clear: both;">
+				<h2>header mapping: functions</h2>
+				<p>now the fun starts - what if transforming headers need to be done? sure, provide a <a href="https://eclipse.dev/ditto/basic-placeholders.html#function-library">function library</a></p>
+				<pre style="width: 120%; font-size: 0.65em; margin-left:-10%" class="fragment"><code class="hljs">{{ header:foo | fn:default('fallback') }}		# provide a default value if placeholder not existing
+{{ header:foo | fn:substring-before(':') }}	# select parts of a string
+{{ header:foo | fn:substring-after(':') }}	# select parts of a string
+{{ header:foo | fn:replace('foo','bar') }}	# replace characters in a string
+{{ header:foo | fn:lower() }}								# lowercase
+{{ header:foo | fn:upper() }}								# uppercase
+{{ header:foo | fn:trim() }}								# trim from trailing/appended whitespaces
+{{ header:foo | fn:split(',') }}						# split string by delimiter
+{{ header:foo | fn:join(';') }}							# join array into a string
+{{ header:foo | fn:url-encode() }}					# URL encode string</code>
+				</pre>
+				<p class="fragment">functions can - obviously - be combined with pipes <code>|</code></p>
+			</section>
+			<section id="mapping-3" style="clear: both;">
+				<h2>payload mapping</h2>
+				<ul>
+					<li><b>inbound</b> messages to be understood by Ditto:
+					<ul class="fragment">
+						<li>use JavaScript mapper with custom script</li>
+						<li>provide Java based mapper on classpath of Ditto, <a href="https://github.com/eclipse-ditto/ditto-examples/tree/master/custom-ditto-java-payload-mapper">e.g. using protobuf</a></li>
+					</ul>
+					</li>
+					<li class="fragment" style="margin-top: 0.5em;"><b>outbound</b> messages to be understood by others:
+						<ul class="fragment">
+							<li><a href="https://eclipse.dev/ditto/connectivity-mapping.html#normalized-mapper">Normalized mapper</a></li>
+							<li>use JavaScript mapper with custom script</li>
+							<li>provide Java based mapper on classpath of Ditto, <a href="https://github.com/eclipse-ditto/ditto-examples/tree/master/custom-ditto-java-payload-mapper">e.g. using protobuf</a></li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+		</section>
+
+		<!-- Section: Demo -->
+		<section id="demo" style="clear: both;" class="new-chapter" data-state="chapter-background">
+			<h2>Demo</h2>
+			<ul>
+				<li>Ditto Explorer UI</li>
+				<li>Postman</li>
+			</ul>
+		</section>
+
+	</div>
+</div>
+
+<script src="../reveal.js/dist/reveal.js"></script>
+<script src="../reveal.js/plugin/notes/notes.js"></script>
+<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+<script src="../reveal.js/plugin/zoom/zoom.js"></script>
+<script>
+	function getParameterByName(name, url) {
+		if (!url) {
+			url = window.location.href;
+		}
+		name = name.replace(/[\[\]]/g, "\\$&");
+		var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+			results = regex.exec(url);
+		if (!results) {
+			return null;
+		}
+		if (!results[2]) {
+			return '';
+		}
+		return decodeURIComponent(results[2].replace(/\+/g, " "));
+	}
+
+	// More info about initialization & config:
+	// - https://revealjs.com/initialization/
+	// - https://revealjs.com/config/
+	Reveal.initialize({
+											hash: true,
+											controls: true,
+											progress: true,
+											history: true,
+											center: true,
+											fragments: getParameterByName('fragments') === '', // only use "fragments" feature if queryParam 'fragments' is present
+											slideNumber: 'h.v',
+
+											// Learn about plugins: https://revealjs.com/plugins/
+											plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom ]
+										});
+</script>
+</body>
+</html>
