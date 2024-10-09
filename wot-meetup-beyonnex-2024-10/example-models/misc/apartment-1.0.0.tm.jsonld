@@ -1,0 +1,39 @@
+{
+  "@context": [
+    "https://www.w3.org/2022/wot/td/v1.1"
+  ],
+  "@type": "tm:ThingModel",
+  "title": "Apartment",
+  "description": "The apartment as a virtual thing, containing several rooms, being part of a building",
+  "version": {
+    "model": "1.0.0"
+  },
+  "links": [
+    {
+      "rel": "tm:extends",
+      "href": "https://thjaeckle.github.io/slides/wot-meetup-beyonnex-2024-10/example-models/common/type-aware-1.0.0.tm.jsonld",
+      "type": "application/tm+json"
+    }
+  ],
+  "tm:optional": [],
+  "properties": {
+    "type": {
+      "const": "APARTMENT",
+      "$comment": "Inherited by 'type-aware' extension - just setting the constant value"
+    },
+    "id": {
+      "title": "Apartment ID",
+      "type": "string",
+      "readOnly": true,
+      "pattern": "^[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}$"
+    },
+    "buildingId": {
+      "title": "Building ID",
+      "type": "string",
+      "readOnly": true,
+      "pattern": "^[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}$"
+    }
+  },
+  "actions": {
+  }
+}

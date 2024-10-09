@@ -1,0 +1,29 @@
+{
+  "@context": [
+    "https://www.w3.org/2022/wot/td/v1.1"
+  ],
+  "@type": "tm:ThingModel",
+  "title": "Type aware",
+  "description": "An asset which is aware of what kind of type it is",
+  "version": {
+    "model": "1.0.0"
+  },
+  "links": [],
+  "tm:optional": [],
+  "properties": {
+    "type": {
+      "title": "Type",
+      "description": "The type of the asset",
+      "type": "string",
+      "readOnly": true,
+      "enum": [
+        "SMART_THERMOSTAT",
+        "HEAT_COST_ALLOCATOR",
+        "LORA_GATEWAY",
+        "BUILDING",
+        "APARTMENT",
+        "ROOM"
+      ]
+    }
+  }
+}

@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Using WoT Thing Models as a basis to make to housing sector smart and energy-efficient</title>
+
+	<meta name="description" content="Using WoT Thing Models as a basis to make to housing sector smart and energy-efficient">
+	<meta name="author" content="Thomas Jäckle">
+	<meta name="date" content="2024-10-14">
+	<meta http-equiv="content-language" content="en">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<link rel="stylesheet" href="../font-awesome/css/all.min.css">
+
+	<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+	<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+	<!--		<link rel="stylesheet" href="../reveal.js/dist/theme/league.css">-->
+	<link rel="stylesheet" href="../reveal.js/dist/theme/white.css">
+	<link rel="stylesheet" href="../css/custom.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css">
+</head>
+<body>
+<div class="reveal">
+	<div class="slides">
+		<section>
+			<section id="title" class="new-chapter" data-background="./images/ditto_symbolonly.svg" data-background-size="40%" data-state="chapter-background">
+				<h1 style="font-size: 1.8em">WoT CG Meetup 2024-10-14</h1>
+				<br/>
+				<h2>using <img src="./images/wot-logo-large-blue.svg" style="width: 15%;vertical-align: middle" alt="Web of Things"> Thing Models</h2>
+				<h3> as a basis to make to housing sector smart and energy-efficient</h3>
+				<hr />
+				<div>
+					<small class="introlink">Date: 14.10.2024, by <a
+						href="mailto:thomas.jaeckle@beyonnex.io">Thomas Jäckle</a> (<a
+						href="https://x.com/thjaeckle">@thjaeckle</a>)
+					</small>
+				</div>
+				<img src="./images/beyonnex-name-rgb.png" style="width: 40%;margin:0" alt="beyonnex.io logo"/>
+			</section>
+		</section>
+
+		<!-- Section: About -->
+		<section style="clear: both;">
+			<section id="about-beyonnex" class="new-chapter" data-state="chapter-background">
+				<h3>about <img src="./images/beyonnex-name-rgb.png" style="width: 40%;margin:0;vertical-align: middle" alt="beyonnex.io logo"/></h3>
+				<ul style="font-size: 0.9em">
+					<li>digitizing <b>real estate</b> / the housing sector</li>
+					<li class="fragment" style="padding-top: 0.8em">young <b>IoT startup</b> (< 3 years)</li>
+					<li class="fragment" style="padding-top: 0.8em">part of the <b>Noventic group</b></li>
+					<li class="fragment" style="padding-top: 0.8em">connecting different types of devices to our own IoT backend</li>
+					<li class="fragment" style="padding-top: 0.8em">HQ: Hamburg, Germany - employees (>100) all over Europe</li>
+				</ul>
+			</section>
+			<section id="about-me" class="new-chapter" data-state="chapter-background">
+				<h3>about me</h3>
+				<div style="text-align: left; float: left; width: 65%; font-size: 0.9em">
+					<ul>
+						<li>Software Engineer</li>
+						<li class="fragment" data-fragment-index="1" style="padding-top: 0.8em">Lead of IoT Foundation @beyonnex.io</li>
+						<li class="fragment" data-fragment-index="2" style="padding-top: 0.8em">formerly invited expert and participating for Bosch in WoT WG</li>
+						<li class="fragment" data-fragment-index="3" style="padding-top: 0.8em">project lead and main committer of <a href="https://eclipse.dev/ditto">Eclipse Ditto™</a>, an IoT middleware and digital twin framework</li>
+					</ul>
+				</div>
+				<div style="text-align: left; float: right; width: 35%">
+					<img src="./images/thomas-jaeckle-quadratic-800.jpeg" style="width: 80%; margin-left: auto; margin-right: auto; display:block" alt="Thomas Jäckle">
+					<img class="fragment" data-fragment-index="3" src="./images/ditto.svg" style="width: 50%; margin-left: auto; margin-right: auto; margin-top: 1em; display:block" alt="Eclipse Ditto logo">
+				</div>
+			</section>
+		</section>
+
+
+		<!-- Section: Beyonnex mission -->
+		<section style="clear: both;">
+			<section id="beyonnex-1" style="clear: both;">
+				<img src="./images/beyonnex-name-rgb.png" style="width: 40%;margin:0;vertical-align: middle" alt="beyonnex.io logo"/>
+				<br>
+				<br>
+				<ul style="font-size: 0.9em">
+					<li>our world: millions of private households in apartment blocks in the housing industry</li>
+					<li class="fragment" style="padding-top: 0.5em">our customers: the housing companies / landlords</li>
+					<li class="fragment" style="padding-top: 0.5em">residents use the devices <b>as a service</b><br/>(think of: battery, connectivity, maintenance)</li>
+				</ul>
+			</section>
+			<section id="beyonnex-2" style="clear: both;">
+				<h3>submetering devices</h3>
+				<br>
+				<p>collect and allocate <b>heat consumption</b> of residents</p>
+				<img src="./images/Heizkostenverteiler_035.jpg" style="width: 20%;margin:0;vertical-align: middle" alt="Heizkostenverteiler">
+				<img src="./images/noventic-IoT-Gateway_2-15.png" style="width: 35%;margin:0;vertical-align: middle" alt="Noventic IoT Gateway">
+				<img src="./images/verschraubungs-wasserzaehler-q-water-5-5-elektronisch-funk-qundis-aufputz-min.png" style="width: 25%;margin:0;vertical-align: middle" alt="Heizkostenverteiler">
+			</section>
+			<section id="beyonnex-3" style="clear: both;">
+				<h3>smart heating devices</h3>
+				<br>
+				<p>give residents more <b>control</b> over their heat consumption via App or manually</p>
+				<img src="./images/smart_radiator_thermostat_line_x_noventic_product_0986_20-2_00.png" style="width: 45%;margin:0;vertical-align: middle" alt="Smart Radiator Thermostat">
+				<img src="./images/kalo-smart-screenshot-1.png" class="fragment" style="width: 15%;margin:0;vertical-align: middle" alt="Kalo Smart App">
+			</section>
+			<section id="beyonnex-4" style="clear: both;">
+				<h3>how are those devices connected?</h3>
+				<ul style="font-size: 0.9em">
+					<div style="float: left; width: 30%">
+						<img src="./images/m-bus-logo.png" style="width: 95%;margin:0;vertical-align: middle" alt="M-Bus">
+					</div>
+					<div style="float: right; width: 70%">
+						<li>Meter-Bus (European standard for the remote reading of water, gas or electricity meters)
+							<ul class="fragment" data-fragment-index="1"><li>uni-directional</li></ul>
+						</li>
+					</div>
+					<div class="fragment" data-fragment-index="2" style="clear: both; float: left; width: 30%">
+						<img src="./images/LoRaWAN_Logo.svg" style="width: 95%;margin:0;vertical-align: middle" alt="LoRaWAN">
+					</div>
+					<div class="fragment" data-fragment-index="2" style="float: right; width: 70%">
+						<li style="padding-top: 0.5em">technology using license-free radio frequency band to connect many
+							devices with few gateways over a <b>Lo</b>ng <b>Ra</b>nge, aiming for low power consumption of end devices
+							<ul class="fragment" data-fragment-index="3"><li>bi-directional</li></ul>
+						</li>
+					</div>
+				</ul>
+				<h4 class="fragment" data-fragment-index="4" style="clear: both; padding-top: 0.9em">-> our devices are most of the time offline</h4>
+			</section>
+			<section id="beyonnex-5" style="clear: both;">
+				<h3>device environment</h3>
+				<br>
+				<div style="text-align: left; float: left; width: 60%">
+					<ul style="font-size: 0.9em">
+						<li>especially in the housing sector, the device's <b>environment</b> is important</li>
+						<li class="fragment" style="padding-top: 0.5em">where (building, apartment, etc.) are devices <b>installed</b>?</li>
+						<li class="fragment" style="padding-top: 0.5em">to which customer ("owner") do they <b>belong</b>?</li>
+					</ul>
+				</div>
+				<div style="float: right; width: 40%">
+					<img src="./images/bing-image-creator-rental-house.jpeg" style="width: 95%;margin:0;vertical-align: middle" alt="Rental house">
+					<small style="font-size: 0.4em">Generated with Microsoft Bing Copilot</small>
+				</div>
+				<ul style="clear: both; font-size: 0.9em">
+					<li class="fragment" style="padding-top: 0.5em">who is the current <b>resident</b> allowed to <b>control</b> e.g. thermostats?</li>
+				</ul>
+			</section>
+		</section>
+
+
+		<!-- Section: Digital Twin -->
+		<section style="clear: both;">
+			<section id="digital-twin-1" style="clear: both;">
+				<h3>special challenges to solve</h3>
+				<!-- TODO TJ add graphic / image -->
+				<ul style="font-size: 0.9em">
+					<li>heterogeneous device types</li>
+					<li class="fragment" style="padding-top: 0.5em">devices mostly offline</li>
+					<li class="fragment" style="padding-top: 0.5em">different user groups (e.g. residents, installers, operators/supporters)</li>
+					<li class="fragment" style="padding-top: 0.5em">multiple development teams
+						<ul>
+							<li class="fragment">either connecting "their" device types</li>
+							<li class="fragment">or using device functionality (e.g. for mobile apps or operator/support dashboards)</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<section id="digital-twin-2" style="clear: both;">
+				<h3>a solution: Digital Twin</h3>
+				<!-- TODO TJ add graphic / image -->
+				<br/>
+				<ul style="font-size: 0.9em">
+					<li class="fragment">providing <b>APIs</b> for <b>accessing device data</b> and sending commands</li>
+					<li class="fragment" style="padding-top: 0.5em"><b>abstracting</b> from <b>protocols</b> devices are connected with</li>
+					<li class="fragment" style="padding-top: 0.5em">handling <b>access control</b> for various user groups</li>
+					<li class="fragment" style="padding-top: 0.5em">enabling <b>higher order twins</b> for rooms, apartments, buildings</li>
+					<li class="fragment" style="padding-top: 0.5em">used by various different development teams as <b>IoT middleware</b></li>
+				</ul>
+			</section>
+		</section>
+
+
+		<!-- Section: Ditto -->
+		<section style="clear: both;">
+			<section id="ditto-1" style="clear: both;">
+				<h3>Eclipse Ditto in a nutshell</h3>
+				<br/>
+				<img src="./images/ditto-super-1.png" alt="Ditto supergraphic">
+			</section>
+			<section id="ditto-2" style="clear: both;">
+				<h3>Eclipse Ditto in context</h3>
+				<div style="text-align: left; float: left; width: 65%">
+					<img src="./images/ditto-in-action-2020.png" style="width: 90%;padding-top:0.5em" alt="Ditto in action"/>
+				</div>
+				<div style="text-align: left; float: right; width: 35%">
+					<p style="padding-top:3.5em; text-align: center">Ditto as<br/>IoT<br/>and/or <br/>Digital Twin<br/> "middleware"</p>
+				</div>
+			</section>
+			<section id="ditto-3" style="clear: both;">
+				<h3>device data as APIs</h3>
+				<div style="text-align: left; float: left; width: 35%">
+                <pre style="width: 100%; font-size: 0.45em;"><code class="hljs json">{
+  "thingId": "io.beyonnex.srt:my-srt",
+  "policyId": "io.beyonnex.room:my-room",
+  "attributes": {
+    "serial": "4711-0815",
+    "location": {
+      "buildingId": "nice-building"
+    }
+  },
+  "features": {
+    "temp": {
+      "properties": {
+        "value": 23.42
+      }
+    }
+  }
+}</code></pre>
+					<p style="text-align: center">JSON repr. of a Thing</p>
+				</div>
+				<div style="text-align: left; float: right; width: 64%" class="fragment">
+                    <pre style="width: 105%; font-size: 0.45em;"><code class="hljs text">GET/PUT/PATCH/DELETE /things/io.beyonnex.srt:my-srt
+ /things/io.beyonnex.srt:my-srt/thingId
+ /things/io.beyonnex.srt:my-srt/policyId
+ /things/io.beyonnex.srt:my-srt/attributes
+ /things/io.beyonnex.srt:my-srt/attributes/serial
+ /things/io.beyonnex.srt:my-srt/attributes/location
+ /things/io.beyonnex.srt:my-srt/attributes/location/buildingId
+
+
+ /things/io.beyonnex.srt:my-srt/features
+ /things/io.beyonnex.srt:my-srt/features/temp
+ /things/io.beyonnex.srt:my-srt/features/temp/properties
+ /things/io.beyonnex.srt:my-srt/features/temp/properties/value
+
+
+
+
+</code></pre>
+					<p style="text-align: center">HTTP API of the Thing</p>
+				</div>
+			</section>
+			<section id="ditto-4" style="clear: both;">
+				<h3>Ditto's WoT integration</h3>
+				<br>
+				<div style="text-align: left; float: left; width: 45%">
+					<p style="font-size: 0.8em">a Ditto managed digital twin (a.k.a "thing") can reference a (WoT Thing) model</p>
+				</div>
+				<div style="text-align: left; float: right; width: 55%">
+                <pre style="width: 100%; font-size: 0.45em;"><code class="hljs json">{
+  "thingId": "io.beyonnex.srt:my-srt",
+  "definition": "https://models.some.domain.org/thermostat-1.2.0.tm.jsonld"
+}</code></pre>
+				</div>
+				<ul style="font-size: 0.8em">
+					<li class="fragment">upon <b>thing creation</b>, a JSON skeleton is generated based on the defined model <code style="font-size: 0.8em; background-color: lightgray">properties</code></li>
+					<li class="fragment" style="padding-top: 0.5em">for each thing, a <b>WoT Thing Description</b> is <b>generated</b> (on the fly) based on model, providing HTTP <code style="font-size: 0.8em; background-color: lightgray">forms</code> for defined <code style="font-size: 0.8em; background-color: lightgray">properties, actions, events</code></li>
+					<li class="fragment" style="padding-top: 0.5em"><b>new</b> (since Ditto 3.6.0): validation of thing (<code style="font-size: 0.8em; background-color: lightgray">properties</code>) modifications and <code style="font-size: 0.8em; background-color: lightgray">action</code> + <code style="font-size: 0.8em; background-color: lightgray">event</code> payload based on WoT TM</li>
+				</ul>
+			</section>
+			<section id="ditto-5" style="clear: both;">
+				<h3>TM based thing validation</h3>
+				<br>
+				<div style="float:left; width: 48%">
+					<ul style="font-size: 0.8em">
+						<li><b>Ditto</b> now can <b>ensure</b> that interaction with a twin always <b>adheres to the defined model</b></li>
+						<li class="fragment" data-fragment-index="1" style="padding-top: 0.5em">reasoning: <b>programming errors happen</b> - and can now already be detected early during development</li>
+					</ul>
+				</div>
+				<div style="text-align: left; float: right; width: 52%">
+					<pre style="width: 100%; font-size: 0.45em;"><code class="hljs text">PUT https://ditto.host/api/2/things/io.beyonnex.thermostat:my-t1/attributes/serial
+false
+</code></pre>
+                <pre class="fragment" data-fragment-index="1" style="width: 95%; font-size: 0.45em;"><code class="hljs json">{
+  "status": 400,
+  "error": "wot:payload.validation.error",
+  "message": "The provided payload did not conform to the specified WoT (Web of Things) model.",
+  "description": "The Thing's attribute &lt;/serial> contained validation errors, check the validation details.",
+  "validationDetails": {
+    "/attributes/serial": [
+      ": {type=boolean found, string expected}"
+    ]
+  }
+}</code></pre>
+				</div>
+				<ul style="clear: both; font-size: 0.8em">
+					<li class="fragment" data-fragment-index="2" style="padding-top: 0.5em">also for e.g. action "input" payloads,
+						guiding 3rd party users of published twin API with helpful error messages</li>
+				</ul>
+			</section>
+		</section>
+
+		<!-- Section: Models -->
+		<section style="clear: both;">
+			<section id="models-1" style="clear: both;">
+				<h3>Thing Models and how we use them</h3>
+				<br/>
+				<ul style="font-size: 0.8em">
+					<li>in our Thing Models, we use inheritance
+						(<code style="font-size: 0.7em; background-color: lightgray">tm:extends</code>)
+						<b>and</b> composition (<code style="font-size: 0.7em; background-color: lightgray">tm:submodel</code>),
+						applying "object-oriented" modeling, e.g.:
+						<ul>
+							<li class="fragment" style="padding-top: 0.5em">a thermostat <b>is-a</b> device, a device <b>is</b> aware of its location</li>
+							<li class="fragment" style="padding-top: 0.5em">a thermostat <b>has-a</b> functionality regarding temperature control, child lock and battery usage</li>
+							<li class="fragment" style="padding-top: 0.5em">a room as well <b>has-a</b> functionality regarding temperature control (but not child lock and battery usage)</li>
+						</ul>
+					</li>
+					<li class="fragment" style="padding-top: 0.5em">occasionally as well importing single capabilities cross-model (using <code style="font-size: 0.8em; background-color: lightgray">tm:ref</code>)</li>
+				</ul>
+			</section>
+			<section id="models-2" style="clear: both;">
+				<h3>modeled as class diagram</h3>
+				<img src="./images/wot-meetup-class-diagram.png" style="width: 65%" alt="Class diagram">
+			</section>
+			<section id="models-3" style="clear: both;">
+				<h3>how we create models</h3>
+				<div style="float: left; width: 35%">
+					<ul style="font-size: 0.8em">
+						<li>write new<br/>(or copy&paste from existing ones) TMs in our favorite <b>IDE</b></li>
+						<li class="fragment">apply <b>semantic versioning</b></li>
+					</ul>
+				</div>
+				<div style="float: right; width: 65%">
+					<img src="./images/intellij-screenshot.png" style="width: 100%" alt="IntelliJ screenshot">
+				</div>
+				<div style="clear: both">
+					<ul style="font-size: 0.8em">
+						<li class="fragment">commit and push TMs to version control (<b>Git</b>)</li>
+						<li class="fragment">CI/CD pipeline automatically <b>publishes TMs</b> to a "development" <b>website</b></li>
+						<li class="fragment"><b>Git tags</b> to <b>release TMs</b></li>
+						<li class="fragment">released TMs are deployed to a QA and productive website</li>
+					</ul>
+				</div>
+			</section>
+			<section id="models-4" style="clear: both;">
+				<h3>model tooling: OpenAPI</h3>
+				<br>
+				<ul style="font-size: 0.8em">
+					<li><b>writing/enhancing</b> TMs <b>is hard</b></li>
+					<li class="fragment" style="padding-top: 0.5em"><b>reading TMs also</b> needs quite some understanding</li>
+					<li class="fragment" style="padding-top: 0.5em">so we created some <b>tooling to help our development</b> teams
+						<ul>
+							<li class="fragment" style="padding-top: 0.5em"><b>generating OpenAPI definition</b> for complete Ditto <b>Things</b> based on TM and Ditto "translation"</li>
+							<li class="fragment" style="padding-top: 0.5em">during that step <b>ensuring</b> that WoT TM can be parsed</li>
+							<li class="fragment" style="padding-top: 0.5em">doing that <b>automatically for merge requests</b></li>
+						</ul>
+					</li>
+				</ul>
+				<!-- TODO TJ screenshot of the MR comment?? or of the Swagger-UI? -->
+			</section>
+			<section id="models-5" style="clear: both;">
+				<h3>model tooling: code generation</h3>
+				<br>
+				<ul style="font-size: 0.8em">
+					<li>before using WoT TMs, we had challenges to keep our things "consistent"</li>
+					<li class="fragment" style="padding-top: 0.5em">e.g. often data classes were manually written, typos and wrong data types were happening often</li>
+					<li class="fragment" style="padding-top: 0.5em">so we created some <b>tooling to help our development</b> teams
+					<ul>
+						<li class="fragment" style="padding-top: 0.5em"><b>generating Kotlin (data) classes</b> for complete Ditto <b>Things</b>, e.g. of type "Thermostat"</li>
+						<li class="fragment" style="padding-top: 0.5em"><b>generating a Kotlin DSL</b> to simply build new instances in code (incl. compiler checks)</li>
+						<li class="fragment" style="padding-top: 0.5em">providing that as <b>Maven plugin</b></li>
+					</ul>
+					</li>
+				</ul>
+				<!-- TODO TJ screenshot of Kotlin DSL, providing Thermostat data -->
+			</section>
+		</section>
+
+
+	</div>
+</div>
+
+<script src="../reveal.js/dist/reveal.js"></script>
+<script src="../reveal.js/plugin/notes/notes.js"></script>
+<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+<script src="../reveal.js/plugin/zoom/zoom.js"></script>
+<script>
+	function getParameterByName(name, url) {
+		if (!url) {
+			url = window.location.href;
+		}
+		name = name.replace(/[\[\]]/g, "\\$&");
+		var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+			results = regex.exec(url);
+		if (!results) {
+			return null;
+		}
+		if (!results[2]) {
+			return '';
+		}
+		return decodeURIComponent(results[2].replace(/\+/g, " "));
+	}
+
+	// More info about initialization & config:
+	// - https://revealjs.com/initialization/
+	// - https://revealjs.com/config/
+	Reveal.initialize({
+											hash: true,
+											controls: true,
+											progress: true,
+											history: true,
+											center: true,
+											fragments: getParameterByName('fragments') === '', // only use "fragments" feature if queryParam 'fragments' is present
+											slideNumber: 'h.v',
+
+											// Learn about plugins: https://revealjs.com/plugins/
+											plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom ]
+										});
+</script>
+</body>
+</html>

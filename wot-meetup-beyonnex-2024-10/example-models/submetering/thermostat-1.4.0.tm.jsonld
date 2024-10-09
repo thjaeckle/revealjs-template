@@ -1,0 +1,53 @@
+{
+  "@context": [
+    "https://www.w3.org/2022/wot/td/v1.1",
+    {
+      "ditto": "https://ditto.eclipseprojects.io/wot/ditto-extension#",
+      "om2": "http://www.ontology-of-units-of-measure.org/resource/om-2/",
+      "xsd": "http://www.w3.org/2001/XMLSchema#"
+    }
+  ],
+  "@type": "tm:ThingModel",
+  "title": "Thermostat",
+  "description": "The smart Thermostat with all of its supported capabilities",
+  "version": {
+    "model": "1.4.0"
+  },
+  "links": [
+    {
+      "rel": "tm:extends",
+      "href": "https://thjaeckle.github.io/slides/wot-meetup-beyonnex-2024-10/example-models/common/lora-device-1.2.0.tm.jsonld",
+      "type": "application/tm+json"
+    },
+    {
+      "rel": "tm:submodel",
+      "href": "https://thjaeckle.github.io/slides/wot-meetup-beyonnex-2024-10/example-models/smartheating/submodels/temperature-control-1.1.1.tm.jsonld",
+      "type": "application/tm+json",
+      "instanceName": "temperatureControl"
+    },
+    {
+      "rel": "tm:submodel",
+      "href": "https://thjaeckle.github.io/slides/wot-meetup-beyonnex-2024-10/example-models/smartheating/submodels/child-lock-1.0.0.tm.jsonld",
+      "type": "application/tm+json",
+      "instanceName": "childLock"
+    },
+    {
+      "rel": "tm:submodel",
+      "href": "https://thjaeckle.github.io/slides/wot-meetup-beyonnex-2024-10/example-models/smartheating/submodels/battery-2.1.3.tm.jsonld",
+      "type": "application/tm+json",
+      "instanceName": "battery"
+    }
+  ],
+  "tm:optional": [
+    "/properties/id",
+    "/properties/location"
+  ],
+  "properties": {
+    "type": {
+      "const": "SMART_RADIATOR_THERMOSTAT",
+      "$comment": "Inherited by 'type-aware' via 'lora-device' extension - just setting the constant value"
+    }
+  },
+  "actions": {},
+  "events": {}
+}

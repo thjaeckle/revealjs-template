@@ -1,0 +1,35 @@
+{
+  "@context": [
+    "https://www.w3.org/2022/wot/td/v1.1",
+    {
+      "ditto": "https://ditto.eclipseprojects.io/wot/ditto-extension#",
+      "om2": "http://www.ontology-of-units-of-measure.org/resource/om-2/",
+      "xsd": "http://www.w3.org/2001/XMLSchema#"
+    }
+  ],
+  "@type": "tm:ThingModel",
+  "title": "Heat Cost Allocator",
+  "description": "The HCA (Heat Cost Allocator) with all of its supported capabilities",
+  "version": {
+    "model": "1.0.0"
+  },
+  "links": [
+    {
+      "rel": "tm:extends",
+      "href": "https://thjaeckle.github.io/slides/wot-meetup-beyonnex-2024-10/example-models/common/mbus-device-1.1.0.tm.jsonld",
+      "type": "application/tm+json"
+    }
+  ],
+  "tm:optional": [
+    "/properties/id",
+    "/properties/location"
+  ],
+  "properties": {
+    "type": {
+      "const": "HEAT_COST_ALLOCATOR",
+      "$comment": "Inherited by 'type-aware' via 'mbus-device' extension - just setting the constant value"
+    }
+  },
+  "actions": {},
+  "events": {}
+}

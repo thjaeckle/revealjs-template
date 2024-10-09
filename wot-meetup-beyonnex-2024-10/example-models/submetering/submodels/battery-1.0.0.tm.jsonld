@@ -1,0 +1,104 @@
+{
+  "@context": [
+    "https://www.w3.org/2022/wot/td/v1.1",
+    {
+      "ditto": "https://ditto.eclipseprojects.io/wot/ditto-extension#",
+      "om2": "http://www.ontology-of-units-of-measure.org/resource/om-2/",
+      "xsd": "http://www.w3.org/2001/XMLSchema#"
+    }
+  ],
+  "@type": "tm:ThingModel",
+  "title": "Battery",
+  "description": "The battery information of a device",
+  "version": {
+    "model": "1.0.0"
+  },
+  "links": [],
+  "tm:optional": [],
+  "properties": {
+    "voltage": {
+      "@type": "om2:ElectricPotential",
+      "title": "Voltage",
+      "description": "The current voltage of the battery",
+      "type": "number",
+      "unit": "om2:volt",
+      "readOnly": true,
+      "ditto:category": "status"
+    }
+  },
+  "actions": {
+    "fetchBatteryHistory": {
+      "title": "Fetch battery history",
+      "description": "Fetch historical battery data",
+      "input": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "title": "From which date to fetch the data",
+            "description": "A datetime in ISO 8601 format to fetch data from",
+            "type": "string",
+            "format": "date-time",
+            "unit": "xsd:dateTimeStamp"
+          },
+          "to": {
+            "title": "The date till which to fetch the data",
+            "description": "A datetime in ISO 8601 format till which to fetch data",
+            "type": "string",
+            "format": "date-time",
+            "unit": "xsd:dateTimeStamp"
+          },
+          "limit": {
+            "title": "Limit",
+            "description": "The number of results to return",
+            "type": "integer"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "from",
+          "to"
+        ]
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "unit": {
+            "title": "Unit",
+            "description": "Unit of the values",
+            "type": "string",
+            "const": "VOLTS"
+          },
+          "values": {
+            "title": "Battery values",
+            "description": "The battery values with corresponding times",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "v": {
+                  "title": "Battery value",
+                  "description": "The value of the battery",
+                  "type": "number",
+                  "unit": "om2:volt"
+                },
+                "t": {
+                  "title": "Time",
+                  "description": "The time of the recorded battery voltage",
+                  "type": "string",
+                  "format": "date-time",
+                  "unit": "xsd:dateTimeStamp"
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "unit",
+          "values"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "@context": [
+    "https://www.w3.org/2022/wot/td/v1.1"
+  ],
+  "@type": "tm:ThingModel",
+  "title": "LoRa device",
+  "description": "A LoRa device with some generic LoRa specific capabilities",
+  "version": {
+    "model": "1.2.0"
+  },
+  "links": [
+    {
+      "rel": "tm:extends",
+      "href": "https://thjaeckle.github.io/slides/wot-meetup-beyonnex-2024-10/example-models/common/device-1.0.0.tm.jsonld",
+      "type": "application/tm+json"
+    }
+  ],
+  "tm:optional": [
+    "/properties/id"
+  ],
+  "properties": {
+    "devEUI": {
+      "title": "DevEUI",
+      "description": "The DevEUI is a 64-bit globally-unique Extended Unique Identifier (EUI-64) assigned by the manufacturer of the device",
+      "type": "string",
+      "readOnly": true,
+      "pattern": "^[0-9a-f]{16}$"
+    }
+  }
+}

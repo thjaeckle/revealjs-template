@@ -1,0 +1,40 @@
+{
+  "@context": [
+    "https://www.w3.org/2022/wot/td/v1.1",
+    {
+      "ditto": "https://ditto.eclipseprojects.io/wot/ditto-extension#"
+    }
+  ],
+  "@type": "tm:ThingModel",
+  "title": "Child lock",
+  "description": "The child lock configuration",
+  "version": {
+    "model": "1.0.0"
+  },
+  "links": [],
+  "tm:optional": [],
+  "properties": {
+    "enabled": {
+      "title": "Enabled",
+      "description": "Whether the child lock is enabled or not",
+      "type": "boolean",
+      "readOnly": true,
+      "ditto:category": "configuration",
+      "default": false
+    }
+  },
+  "actions": {
+    "changeEnabled": {
+      "title": "Change enabled",
+      "description": "Change the 'enabled' property with a confirmation if the change was delivered",
+      "input": {
+        "title": "Enable value",
+        "description": "Whether child lock should be enabled",
+        "type": "boolean"
+      },
+      "output": {
+        "tm:ref": "https://thjaeckle.github.io/slides/wot-meetup-beyonnex-2024-10/example-models/common/action-output-1.0.0.tm.jsonld#/properties/outputObject"
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "@context": [
+    "https://www.w3.org/2022/wot/td/v1.1"
+  ],
+  "@type": "tm:ThingModel",
+  "title": "Output Component",
+  "description": "Reusable output component",
+  "version": {
+    "model": "1.0.0"
+  },
+  "links": [],
+  "tm:optional": [],
+  "properties": {
+    "outputObject": {
+      "title": "output",
+      "description": "Contains information about the output of an executed action",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "delivered": {
+          "title": "Delivered",
+          "description": "States whether the action has been delivered to the device",
+          "type": "boolean"
+        },
+        "errorMessage": {
+          "title": "Error message",
+          "description": "In case of 'delivered' being 'false' this field can contain additional information about the error",
+          "type": "string"
+        },
+        "errorDetails": {
+          "title": "Error details",
+          "description": "In case of 'delivered' being 'false' this field can contain list of error details",
+          "type": "array",
+          "items": {
+            "title": "errorDetail",
+            "description": "A single error detail about the error",
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "delivered"
+      ]
+    }
+  }
+}
