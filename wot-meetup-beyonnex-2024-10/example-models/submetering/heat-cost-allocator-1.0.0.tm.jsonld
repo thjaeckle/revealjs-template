@@ -27,7 +27,7 @@
   "properties": {
     "type": {
       "const": "HEAT_COST_ALLOCATOR",
-      "$comment": "Inherited by 'type-aware' via 'mbus-device' extension - just setting the constant value"
+      "$comment": "Inherited by 'identifiable' via 'mbus-device' extension - just setting the constant value"
     }
   },
   "actions": {},

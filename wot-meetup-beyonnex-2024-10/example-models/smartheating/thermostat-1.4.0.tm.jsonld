@@ -45,7 +45,7 @@
   "properties": {
     "type": {
       "const": "SMART_RADIATOR_THERMOSTAT",
-      "$comment": "Inherited by 'type-aware' via 'lora-device' extension - just setting the constant value"
+      "$comment": "Inherited by 'identifiable' via 'lora-device' extension - just setting the constant value"
     }
   },
   "actions": {},

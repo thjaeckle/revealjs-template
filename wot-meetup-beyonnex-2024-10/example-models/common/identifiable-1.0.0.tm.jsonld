@@ -3,14 +3,20 @@
     "https://www.w3.org/2022/wot/td/v1.1"
   ],
   "@type": "tm:ThingModel",
-  "title": "Type aware",
-  "description": "An asset which is aware of what kind of type it is",
+  "title": "Identifiable",
+  "description": "An asset which contains an identifier and is aware of what kind of type it is",
   "version": {
     "model": "1.0.0"
   },
   "links": [],
   "tm:optional": [],
   "properties": {
+    "id": {
+      "title": "ID",
+      "type": "string",
+      "readOnly": true,
+      "pattern": "^[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}$"
+    },
     "type": {
       "title": "Type",
       "description": "The type of the asset",

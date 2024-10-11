@@ -1,0 +1,1399 @@
+openapi: 3.1.0
+info:
+  title: Thermostat
+  description: The smart Thermostat with all of its supported capabilities
+  version: 1.4.0
+servers:
+- url: https://ditto.eclipseprojects.io/api/2/things
+  description: "Ditto: Sandbox"
+security:
+- Bearer: []
+tags:
+- name: Thing
+  description: Complete Thermostat
+- name: Attributes
+  description: Attributes of the Thermostat
+- name: Actions
+  description: Actions to be invoked on the Thermostat
+- name: "Feature: Temperature control"
+  description: The temperature control for the device or virtual thing
+- name: "Feature: Temperature control - Actions"
+  description: Actions to be invoked on the Temperature control
+- name: "Feature: Child lock"
+  description: The child lock configuration
+- name: "Feature: Child lock - Actions"
+  description: Actions to be invoked on the Child lock
+- name: "Feature: Battery"
+  description: The battery information of a device
+- name: "Feature: Battery - Actions"
+  description: Actions to be invoked on the Battery
+paths:
+  /{thingId}:
+    get:
+      tags:
+      - Thing
+      summary: Retrieves the complete 'Thermostat' thing
+      parameters:
+      - $ref: '#/components/parameters/PathParamThingId'
+      - $ref: '#/components/parameters/QueryParamFields'
+      - $ref: '#/components/parameters/QueryParamCondition'
+      responses:
+        "200":
+          description: Returns complete thing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/thing'
+        "400":
+          description: "The request at '/' failed due to bad input, check the error\
+            \ for details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_400'
+        "401":
+          description: Unauthorized to access '/'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_401'
+        "404":
+          description: Requested path '/' does either not exist or caller has insufficient
+            `READ` permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_404'
+    patch:
+      tags:
+      - Thing
+      summary: Merges the complete 'Thermostat' thing
+      parameters:
+      - $ref: '#/components/parameters/PathParamThingId'
+      - $ref: '#/components/parameters/QueryParamCondition'
+      - name: Content-Type
+        in: header
+        schema:
+          type: string
+          example: application/merge-patch+json
+      requestBody:
+        description: Request payload of merging the complete thing
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/thing'
+      responses:
+        "201":
+          description: The not yet existing thing was successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/thing'
+        "204":
+          description: The existing thing was successfully merged
+        "400":
+          description: "The request at '/' failed due to bad input, check the error\
+            \ for details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_400'
+        "401":
+          description: Unauthorized to access '/'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_401'
+        "403":
+          description: "Forbidden to access '/', ensure caller has required `WRITE`\
+            \ permissions"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_403'
+        "404":
+          description: Requested path '/' does either not exist or caller has insufficient
+            `READ` permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_404'
+  /{thingId}/attributes:
+    get:
+      tags:
+      - Attributes
+      summary: Retrieves all attributes
+      parameters:
+      - $ref: '#/components/parameters/PathParamThingId'
+      - $ref: '#/components/parameters/QueryParamFields'
+      - $ref: '#/components/parameters/QueryParamCondition'
+      responses:
+        "200":
+          description: Returns all attributes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/attributes'
+        "400":
+          description: "The request at 'attributes' failed due to bad input, check\
+            \ the error for details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_400'
+        "401":
+          description: Unauthorized to access 'attributes'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_401'
+        "404":
+          description: Requested path 'attributes' does either not exist or caller
+            has insufficient `READ` permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_404'
+  /{thingId}/attributes/devEUI:
+    get:
+      tags:
+      - Attributes
+      summary: Retrieves the 'DevEUI'
+      description: The DevEUI is a 64-bit globally-unique Extended Unique Identifier
+        (EUI-64) assigned by the manufacturer of the device
+      parameters:
+      - $ref: '#/components/parameters/PathParamThingId'
+      - $ref: '#/components/parameters/QueryParamFields'
+      - $ref: '#/components/parameters/QueryParamCondition'
+      responses:
+        "200":
+          description: The attribute 'devEUI' is returned
+          content:
+            application/json:
+              schema:
+                type: string
+                description: The DevEUI is a 64-bit globally-unique Extended Unique
+                  Identifier (EUI-64) assigned by the manufacturer of the device
+                pattern: "^[0-9a-f]{16}$"
+                readOnly: true
+                title: DevEUI
+                writeOnly: false
+        "400":
+          description: "The request at 'attributes/devEUI' failed due to bad input,\
+            \ check the error for details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_400'
+        "401":
+          description: Unauthorized to access 'attributes/devEUI'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_401'
+        "404":
+          description: Requested path 'attributes/devEUI' does either not exist or
+            caller has insufficient `READ` permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_404'
+  /{thingId}/attributes/id:
+    get:
+      tags:
+      - Attributes
+      summary: Retrieves the 'Device ID'
+      description: "The unique identifier of this device, only known after installation\
+        \ of device"
+      parameters:
+      - $ref: '#/components/parameters/PathParamThingId'
+      - $ref: '#/components/parameters/QueryParamFields'
+      - $ref: '#/components/parameters/QueryParamCondition'
+      responses:
+        "200":
+          description: The attribute 'id' is returned
+          content:
+            application/json:
+              schema:
+                type: string
+                description: "The unique identifier of this device, only known after\
+                  \ installation of device"
+                pattern: "^[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}$"
+                readOnly: true
+                title: Device ID
+                writeOnly: false
+        "400":
+          description: "The request at 'attributes/id' failed due to bad input, check\
+            \ the error for details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_400'
+        "401":
+          description: Unauthorized to access 'attributes/id'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_401'
+        "404":
+          description: Requested path 'attributes/id' does either not exist or caller
+            has insufficient `READ` permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_404'
+  /{thingId}/attributes/location:
+    get:
+      tags:
+      - Attributes
+      summary: Retrieves the 'Location'
+      description: The location of the asset
+      parameters:
+      - $ref: '#/components/parameters/PathParamThingId'
+      - $ref: '#/components/parameters/QueryParamFields'
+      - $ref: '#/components/parameters/QueryParamCondition'
+      responses:
+        "200":
+          description: The attribute 'location' is returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/attribute_location'
+        "400":
+          description: "The request at 'attributes/location' failed due to bad input,\
+            \ check the error for details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_400'
+        "401":
+          description: Unauthorized to access 'attributes/location'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_401'
+        "404":
+          description: Requested path 'attributes/location' does either not exist
+            or caller has insufficient `READ` permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_404'
+  /{thingId}/attributes/manufacturer:
+    get:
+      tags:
+      - Attributes
+      summary: Retrieves the 'Manufacturer'
+      description: The device manufacturer
+      parameters:
+      - $ref: '#/components/parameters/PathParamThingId'
+      - $ref: '#/components/parameters/QueryParamFields'
+      - $ref: '#/components/parameters/QueryParamCondition'
+      responses:
+        "200":
+          description: The attribute 'manufacturer' is returned
+          content:
+            application/json:
+              schema:
+                type: string
+                description: The device manufacturer
+                readOnly: true
+                title: Manufacturer
+                writeOnly: false
+        "400":
+          description: "The request at 'attributes/manufacturer' failed due to bad\
+            \ input, check the error for details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_400'
+        "401":
+          description: Unauthorized to access 'attributes/manufacturer'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_401'
+        "404":
+          description: Requested path 'attributes/manufacturer' does either not exist
+            or caller has insufficient `READ` permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_404'
+  /{thingId}/attributes/serial:
+    get:
+      tags:
+      - Attributes
+      summary: Retrieves the 'Serial number'
+      description: The serial number of the device
+      parameters:
+      - $ref: '#/components/parameters/PathParamThingId'
+      - $ref: '#/components/parameters/QueryParamFields'
+      - $ref: '#/components/parameters/QueryParamCondition'
+      responses:
+        "200":
+          description: The attribute 'serial' is returned
+          content:
+            application/json:
+              schema:
+                type: string
+                description: The serial number of the device
+                readOnly: true
+                title: Serial number
+                writeOnly: false
+        "400":
+          description: "The request at 'attributes/serial' failed due to bad input,\
+            \ check the error for details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_400'
+        "401":
+          description: Unauthorized to access 'attributes/serial'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_401'
+        "404":
+          description: Requested path 'attributes/serial' does either not exist or
+            caller has insufficient `READ` permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_404'
+  /{thingId}/attributes/type:
+    get:
+      tags:
+      - Attributes
+      summary: Retrieves the 'Type'
+      description: The type of the asset
+      parameters:
+      - $ref: '#/components/parameters/PathParamThingId'
+      - $ref: '#/components/parameters/QueryParamFields'
+      - $ref: '#/components/parameters/QueryParamCondition'
+      responses:
+        "200":
+          description: The attribute 'type' is returned
+          content:
+            application/json:
+              schema:
+                type: string
+                description: The type of the asset
+                readOnly: true
+                title: Type
+                writeOnly: false
+        "400":
+          description: "The request at 'attributes/type' failed due to bad input,\
+            \ check the error for details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_400'
+        "401":
+          description: Unauthorized to access 'attributes/type'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_401'
+        "404":
+          description: Requested path 'attributes/type' does either not exist or caller
+            has insufficient `READ` permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_404'
+  /{thingId}/features/temperatureControl:
+    get:
+      tags:
+      - "Feature: Temperature control"
+      summary: Retrieves the feature Temperature control
+      parameters:
+      - $ref: '#/components/parameters/PathParamThingId'
+      - $ref: '#/components/parameters/QueryParamFields'
+      - $ref: '#/components/parameters/QueryParamCondition'
+      responses:
+        "200":
+          description: Returns the full feature
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/feature_temperatureControl'
+        "401":
+          description: Unauthorized to access 'features/temperatureControl'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_401'
+  /{thingId}/features/temperatureControl/properties/configuration:
+    get:
+      tags:
+      - "Feature: Temperature control"
+      summary: Retrieves all 'configuration' categorized properties of feature Temperature
+        control
+      parameters:
+      - $ref: '#/components/parameters/PathParamThingId'
+      - $ref: '#/components/parameters/QueryParamFields'
+      - $ref: '#/components/parameters/QueryParamCondition'
+      responses:
+        "200":
+          description: Returns the full feature category 'configuration'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/temperatureControl_configuration_properties'
+        "401":
+          description: Unauthorized to access 'features/temperatureControl/properties/configuration'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_401'
+  /{thingId}/features/temperatureControl/properties/configuration/targetTemperature:
+    get:
+      tags:
+      - "Feature: Temperature control"
+      summary: Retrieves the 'Target temperature' property
+      description: Target temperature set on the device in celsius
+      parameters:
+      - $ref: '#/components/parameters/PathParamThingId'
+      - $ref: '#/components/parameters/QueryParamFields'
+      - $ref: '#/components/parameters/QueryParamCondition'
+      responses:
+        "200":
+          description: The feature property 'targetTemperature' is returned
+          content:
+            application/json:
+              schema:
+                type: number
+                description: Target temperature set on the device in celsius
+                maximum: 40
+                minimum: 1
+                readOnly: true
+                title: Target temperature
+                writeOnly: false
+        "400":
+          description: "The request at 'features/temperatureControl/properties/configuration/targetTemperature'\
+            \ failed due to bad input, check the error for details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_400'
+        "401":
+          description: Unauthorized to access 'features/temperatureControl/properties/configuration/targetTemperature'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_401'
+        "404":
+          description: Requested path 'features/temperatureControl/properties/configuration/targetTemperature'
+            does either not exist or caller has insufficient `READ` permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_404'
+  /{thingId}/features/temperatureControl/inbox/messages/changeTargetTemperature:
+    post:
+      tags:
+      - "Feature: Temperature control - Actions"
+      summary: Invokes the 'Change targetTemperature' action
+      description: Change the 'targetTemperature' property with a confirmation if
+        the change was delivered
+      parameters:
+      - $ref: '#/components/parameters/PathParamThingId'
+      - $ref: '#/components/parameters/QueryParamCondition'
+      requestBody:
+        description: Request payload of the 'Change targetTemperature' action
+        content:
+          application/json:
+            schema:
+              type: number
+              description: Target temperature set on the device
+              maximum: 40
+              minimum: 1
+              readOnly: false
+              title: Target temperature value
+              writeOnly: false
+      responses:
+        "200":
+          description: The custom response of the 'changeTargetTemperature' action
+            - the status code is also custom
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/feature_temperatureControl_actionoutput_output'
+        "400":
+          description: "The request at 'features/temperatureControl/inbox/messages/changeTargetTemperature'\
+            \ failed due to bad input, check the error for details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_400'
+        "401":
+          description: Unauthorized to access 'features/temperatureControl/inbox/messages/changeTargetTemperature'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_401'
+        "403":
+          description: "Forbidden to access 'features/temperatureControl/inbox/messages/changeTargetTemperature',\
+            \ ensure caller has required `WRITE` permissions"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_403'
+        "404":
+          description: Requested path 'features/temperatureControl/inbox/messages/changeTargetTemperature'
+            does either not exist or caller has insufficient `READ` permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_404'
+        "408":
+          description: The request could not be completed due to timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_408'
+  /{thingId}/features/childLock:
+    get:
+      tags:
+      - "Feature: Child lock"
+      summary: Retrieves the feature Child lock
+      parameters:
+      - $ref: '#/components/parameters/PathParamThingId'
+      - $ref: '#/components/parameters/QueryParamFields'
+      - $ref: '#/components/parameters/QueryParamCondition'
+      responses:
+        "200":
+          description: Returns the full feature
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/feature_childLock'
+        "401":
+          description: Unauthorized to access 'features/childLock'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_401'
+  /{thingId}/features/childLock/properties/configuration:
+    get:
+      tags:
+      - "Feature: Child lock"
+      summary: Retrieves all 'configuration' categorized properties of feature Child
+        lock
+      parameters:
+      - $ref: '#/components/parameters/PathParamThingId'
+      - $ref: '#/components/parameters/QueryParamFields'
+      - $ref: '#/components/parameters/QueryParamCondition'
+      responses:
+        "200":
+          description: Returns the full feature category 'configuration'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/childLock_configuration_properties'
+        "401":
+          description: Unauthorized to access 'features/childLock/properties/configuration'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_401'
+  /{thingId}/features/childLock/properties/configuration/enabled:
+    get:
+      tags:
+      - "Feature: Child lock"
+      summary: Retrieves the 'Enabled' property
+      description: Whether the child lock is enabled or not
+      parameters:
+      - $ref: '#/components/parameters/PathParamThingId'
+      - $ref: '#/components/parameters/QueryParamFields'
+      - $ref: '#/components/parameters/QueryParamCondition'
+      responses:
+        "200":
+          description: The feature property 'enabled' is returned
+          content:
+            application/json:
+              schema:
+                type: boolean
+                description: Whether the child lock is enabled or not
+                readOnly: true
+                title: Enabled
+                writeOnly: false
+        "400":
+          description: "The request at 'features/childLock/properties/configuration/enabled'\
+            \ failed due to bad input, check the error for details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_400'
+        "401":
+          description: Unauthorized to access 'features/childLock/properties/configuration/enabled'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_401'
+        "404":
+          description: Requested path 'features/childLock/properties/configuration/enabled'
+            does either not exist or caller has insufficient `READ` permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_404'
+  /{thingId}/features/childLock/inbox/messages/changeEnabled:
+    post:
+      tags:
+      - "Feature: Child lock - Actions"
+      summary: Invokes the 'Change enabled' action
+      description: Change the 'enabled' property with a confirmation if the change
+        was delivered
+      parameters:
+      - $ref: '#/components/parameters/PathParamThingId'
+      - $ref: '#/components/parameters/QueryParamCondition'
+      requestBody:
+        description: Request payload of the 'Change enabled' action
+        content:
+          application/json:
+            schema:
+              type: boolean
+              description: Whether child lock should be enabled
+              readOnly: false
+              title: Enable value
+              writeOnly: false
+      responses:
+        "200":
+          description: The custom response of the 'changeEnabled' action - the status
+            code is also custom
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/feature_childLock_actionoutput_output'
+        "400":
+          description: "The request at 'features/childLock/inbox/messages/changeEnabled'\
+            \ failed due to bad input, check the error for details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_400'
+        "401":
+          description: Unauthorized to access 'features/childLock/inbox/messages/changeEnabled'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_401'
+        "403":
+          description: "Forbidden to access 'features/childLock/inbox/messages/changeEnabled',\
+            \ ensure caller has required `WRITE` permissions"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_403'
+        "404":
+          description: Requested path 'features/childLock/inbox/messages/changeEnabled'
+            does either not exist or caller has insufficient `READ` permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_404'
+        "408":
+          description: The request could not be completed due to timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_408'
+  /{thingId}/features/battery:
+    get:
+      tags:
+      - "Feature: Battery"
+      summary: Retrieves the feature Battery
+      parameters:
+      - $ref: '#/components/parameters/PathParamThingId'
+      - $ref: '#/components/parameters/QueryParamFields'
+      - $ref: '#/components/parameters/QueryParamCondition'
+      responses:
+        "200":
+          description: Returns the full feature
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/feature_battery'
+        "401":
+          description: Unauthorized to access 'features/battery'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_401'
+  /{thingId}/features/battery/properties/status:
+    get:
+      tags:
+      - "Feature: Battery"
+      summary: Retrieves all 'status' categorized properties of feature Battery
+      parameters:
+      - $ref: '#/components/parameters/PathParamThingId'
+      - $ref: '#/components/parameters/QueryParamFields'
+      - $ref: '#/components/parameters/QueryParamCondition'
+      responses:
+        "200":
+          description: Returns the full feature category 'status'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/battery_status_properties'
+        "401":
+          description: Unauthorized to access 'features/battery/properties/status'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_401'
+  /{thingId}/features/battery/properties/status/voltage:
+    get:
+      tags:
+      - "Feature: Battery"
+      summary: Retrieves the 'Voltage' property
+      description: The current voltage of the battery
+      parameters:
+      - $ref: '#/components/parameters/PathParamThingId'
+      - $ref: '#/components/parameters/QueryParamFields'
+      - $ref: '#/components/parameters/QueryParamCondition'
+      responses:
+        "200":
+          description: The feature property 'voltage' is returned
+          content:
+            application/json:
+              schema:
+                type: number
+                description: The current voltage of the battery
+                readOnly: true
+                title: Voltage
+                writeOnly: false
+        "400":
+          description: "The request at 'features/battery/properties/status/voltage'\
+            \ failed due to bad input, check the error for details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_400'
+        "401":
+          description: Unauthorized to access 'features/battery/properties/status/voltage'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_401'
+        "404":
+          description: Requested path 'features/battery/properties/status/voltage'
+            does either not exist or caller has insufficient `READ` permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_404'
+  /{thingId}/features/battery/inbox/messages/fetchBatteryHistory:
+    post:
+      tags:
+      - "Feature: Battery - Actions"
+      summary: Invokes the 'Fetch battery history' action
+      description: Fetch historical battery data
+      parameters:
+      - $ref: '#/components/parameters/PathParamThingId'
+      - $ref: '#/components/parameters/QueryParamCondition'
+      requestBody:
+        description: Request payload of the 'Fetch battery history' action
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                from:
+                  type: string
+                  format: date-time
+                  description: A datetime in ISO 8601 format to fetch data from
+                  readOnly: false
+                  title: From which date to fetch the data
+                  writeOnly: false
+                to:
+                  type: string
+                  format: date-time
+                  description: A datetime in ISO 8601 format till which to fetch data
+                  readOnly: false
+                  title: The date till which to fetch the data
+                  writeOnly: false
+                limit:
+                  type: integer
+                  format: int32
+                  description: The number of results to return
+                  readOnly: false
+                  title: Limit
+                  writeOnly: false
+              readOnly: false
+              writeOnly: false
+      responses:
+        "200":
+          description: The custom response of the 'fetchBatteryHistory' action - the
+            status code is also custom
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  unit:
+                    type: string
+                    description: Unit of the values
+                    readOnly: false
+                    title: Unit
+                    writeOnly: false
+                  values:
+                    $ref: '#/components/schemas/top_property_batteryValues'
+                readOnly: false
+                writeOnly: false
+        "400":
+          description: "The request at 'features/battery/inbox/messages/fetchBatteryHistory'\
+            \ failed due to bad input, check the error for details"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_400'
+        "401":
+          description: Unauthorized to access 'features/battery/inbox/messages/fetchBatteryHistory'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_401'
+        "403":
+          description: "Forbidden to access 'features/battery/inbox/messages/fetchBatteryHistory',\
+            \ ensure caller has required `WRITE` permissions"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_403'
+        "404":
+          description: Requested path 'features/battery/inbox/messages/fetchBatteryHistory'
+            does either not exist or caller has insufficient `READ` permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_404'
+        "408":
+          description: The request could not be completed due to timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dittoError_408'
+components:
+  schemas:
+    dittoError_400:
+      type: object
+      description: Provides additional information about an occurred error and how
+        to resolve it
+      example: "{\"status\":400,\"error\":\"things:id.invalid\",\"message\":\"Thing\
+        \ ID 'nope' is not valid!\",\"description\":\"It must conform to the namespaced\
+        \ entity ID notation (see Ditto documentation)\",\"href\":null}"
+      properties:
+        status:
+          type: integer
+          format: int32
+          description: "The status code of the error with HTTP status code semantics\
+            \ (e.g.: 4xx for user errors, 5xx for server errors)"
+          maximum: 599
+          minimum: 400
+          title: Status code
+        error:
+          type: string
+          description: The error code or identifier that uniquely identifies the error
+          title: Error code
+        message:
+          type: string
+          description: The human readable message that explains what went wrong during
+            the execution of a command/message
+          title: Error message
+        description:
+          type: string
+          description: Contains further information about the error e.g. a hint what
+            caused the problem and how to solve it
+          title: Error description
+        href:
+          type: string
+          format: uri
+          description: A link to further information about the error and how to fix
+            it
+          title: Error link
+      required:
+      - status
+      - error
+      - message
+      title: Ditto error
+    dittoError_401:
+      type: object
+      description: Provides additional information about an occurred error and how
+        to resolve it
+      example: "{\"status\":401,\"error\":\"gateway:authentication.failed\",\"message\"\
+        :\"The JWT was missing.\",\"description\":\"Check if your credentials were\
+        \ correct.\",\"href\":null}"
+      properties:
+        status:
+          type: integer
+          format: int32
+          description: "The status code of the error with HTTP status code semantics\
+            \ (e.g.: 4xx for user errors, 5xx for server errors)"
+          maximum: 599
+          minimum: 400
+          title: Status code
+        error:
+          type: string
+          description: The error code or identifier that uniquely identifies the error
+          title: Error code
+        message:
+          type: string
+          description: The human readable message that explains what went wrong during
+            the execution of a command/message
+          title: Error message
+        description:
+          type: string
+          description: Contains further information about the error e.g. a hint what
+            caused the problem and how to solve it
+          title: Error description
+        href:
+          type: string
+          format: uri
+          description: A link to further information about the error and how to fix
+            it
+          title: Error link
+      required:
+      - status
+      - error
+      - message
+      title: Ditto error
+    dittoError_403:
+      type: object
+      description: Provides additional information about an occurred error and how
+        to resolve it
+      example: "{\"status\":403,\"error\":\"things:thing.notmodifiable\",\"message\"\
+        :\"The Thing with ID 'some:thing' could not be modified as the requester had\
+        \ insufficient permissions ('WRITE' is required).\",\"description\":\"Check\
+        \ if the ID of your requested Thing was correct and you have sufficient permissions.\"\
+        ,\"href\":null}"
+      properties:
+        status:
+          type: integer
+          format: int32
+          description: "The status code of the error with HTTP status code semantics\
+            \ (e.g.: 4xx for user errors, 5xx for server errors)"
+          maximum: 599
+          minimum: 400
+          title: Status code
+        error:
+          type: string
+          description: The error code or identifier that uniquely identifies the error
+          title: Error code
+        message:
+          type: string
+          description: The human readable message that explains what went wrong during
+            the execution of a command/message
+          title: Error message
+        description:
+          type: string
+          description: Contains further information about the error e.g. a hint what
+            caused the problem and how to solve it
+          title: Error description
+        href:
+          type: string
+          format: uri
+          description: A link to further information about the error and how to fix
+            it
+          title: Error link
+      required:
+      - status
+      - error
+      - message
+      title: Ditto error
+    dittoError_404:
+      type: object
+      description: Provides additional information about an occurred error and how
+        to resolve it
+      example: "{\"status\":404,\"error\":\"things:thing.notfound\",\"message\":\"\
+        The Thing with ID 'some:thing' could not be found or requester had insufficient\
+        \ permissions to access it.\",\"description\":\"Check if the ID of your requested\
+        \ Thing was correct and you have sufficient permissions.\",\"href\":null}"
+      properties:
+        status:
+          type: integer
+          format: int32
+          description: "The status code of the error with HTTP status code semantics\
+            \ (e.g.: 4xx for user errors, 5xx for server errors)"
+          maximum: 599
+          minimum: 400
+          title: Status code
+        error:
+          type: string
+          description: The error code or identifier that uniquely identifies the error
+          title: Error code
+        message:
+          type: string
+          description: The human readable message that explains what went wrong during
+            the execution of a command/message
+          title: Error message
+        description:
+          type: string
+          description: Contains further information about the error e.g. a hint what
+            caused the problem and how to solve it
+          title: Error description
+        href:
+          type: string
+          format: uri
+          description: A link to further information about the error and how to fix
+            it
+          title: Error link
+      required:
+      - status
+      - error
+      - message
+      title: Ditto error
+    dittoError_408:
+      type: object
+      description: Provides additional information about an occurred error and how
+        to resolve it
+      example: "{\"status\":408,\"error\":\"command.timeout\",\"message\":\"The Command\
+        \ reached the specified timeout of {10000}ms.\",\"description\":\"Try increasing\
+        \ the command timeout.\",\"href\":null}"
+      properties:
+        status:
+          type: integer
+          format: int32
+          description: "The status code of the error with HTTP status code semantics\
+            \ (e.g.: 4xx for user errors, 5xx for server errors)"
+          maximum: 599
+          minimum: 400
+          title: Status code
+        error:
+          type: string
+          description: The error code or identifier that uniquely identifies the error
+          title: Error code
+        message:
+          type: string
+          description: The human readable message that explains what went wrong during
+            the execution of a command/message
+          title: Error message
+        description:
+          type: string
+          description: Contains further information about the error e.g. a hint what
+            caused the problem and how to solve it
+          title: Error description
+        href:
+          type: string
+          format: uri
+          description: A link to further information about the error and how to fix
+            it
+          title: Error link
+      required:
+      - status
+      - error
+      - message
+      title: Ditto error
+    attribute_location:
+      type: object
+      description: The location of the asset
+      properties:
+        buildingId:
+          type: string
+          pattern: "^[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}$"
+          readOnly: false
+          title: Building ID
+          writeOnly: false
+        apartmentId:
+          type: string
+          pattern: "^[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}$"
+          readOnly: false
+          title: Apartment ID
+          writeOnly: false
+        roomId:
+          type: string
+          pattern: "^[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}$"
+          readOnly: false
+          title: Room ID
+          writeOnly: false
+        mountedOn:
+          type: string
+          format: date
+          description: The date on which the device was mounted
+          readOnly: false
+          title: Mounted on
+          writeOnly: false
+      readOnly: true
+      title: Location
+      writeOnly: false
+    attributes:
+      type: object
+      properties:
+        devEUI:
+          type: string
+          description: The DevEUI is a 64-bit globally-unique Extended Unique Identifier
+            (EUI-64) assigned by the manufacturer of the device
+          pattern: "^[0-9a-f]{16}$"
+          readOnly: true
+          title: DevEUI
+          writeOnly: false
+        id:
+          type: string
+          description: "The unique identifier of this device, only known after installation\
+            \ of device"
+          pattern: "^[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}$"
+          readOnly: true
+          title: Device ID
+          writeOnly: false
+        location:
+          $ref: '#/components/schemas/attribute_location'
+        manufacturer:
+          type: string
+          description: The device manufacturer
+          readOnly: true
+          title: Manufacturer
+          writeOnly: false
+        serial:
+          type: string
+          description: The serial number of the device
+          readOnly: true
+          title: Serial number
+          writeOnly: false
+        type:
+          type: string
+          description: The type of the asset
+          readOnly: true
+          title: Type
+          writeOnly: false
+    thing:
+      type: object
+      properties:
+        thingId:
+          type: string
+        policyId:
+          type: string
+        definition:
+          type: string
+        attributes:
+          $ref: '#/components/schemas/attributes'
+        features:
+          $ref: '#/components/schemas/features'
+    features:
+      type: object
+      properties:
+        battery:
+          $ref: '#/components/schemas/feature_battery'
+        childLock:
+          $ref: '#/components/schemas/feature_childLock'
+        temperatureControl:
+          $ref: '#/components/schemas/feature_temperatureControl'
+    temperatureControl_configuration_properties:
+      type: object
+      properties:
+        targetTemperature:
+          type: number
+          description: Target temperature set on the device in celsius
+          maximum: 40
+          minimum: 1
+          readOnly: true
+          title: Target temperature
+          writeOnly: false
+    temperatureControl_properties:
+      type: object
+      properties:
+        configuration:
+          $ref: '#/components/schemas/temperatureControl_configuration_properties'
+    feature_temperatureControl:
+      type: object
+      description: The temperature control for the device or virtual thing
+      properties:
+        properties:
+          $ref: '#/components/schemas/temperatureControl_properties'
+        desiredProperties:
+          $ref: '#/components/schemas/temperatureControl_properties'
+      title: Temperature control
+    top_property_errorDetails:
+      type: array
+      description: In case of 'delivered' being 'false' this field can contain list
+        of error details
+      items:
+        type: string
+        description: A single error detail about the error
+        readOnly: false
+        title: errorDetail
+        writeOnly: false
+      readOnly: false
+      title: Error details
+      writeOnly: false
+    feature_temperatureControl_actionoutput_output:
+      type: object
+      description: Contains information about the output of an executed action
+      properties:
+        delivered:
+          type: boolean
+          description: States whether the action has been delivered to the device
+          readOnly: false
+          title: Delivered
+          writeOnly: false
+        errorMessage:
+          type: string
+          description: In case of 'delivered' being 'false' this field can contain
+            additional information about the error
+          readOnly: false
+          title: Error message
+          writeOnly: false
+        errorDetails:
+          $ref: '#/components/schemas/top_property_errorDetails'
+      readOnly: true
+      title: output
+      writeOnly: false
+    childLock_configuration_properties:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether the child lock is enabled or not
+          readOnly: true
+          title: Enabled
+          writeOnly: false
+    childLock_properties:
+      type: object
+      properties:
+        configuration:
+          $ref: '#/components/schemas/childLock_configuration_properties'
+    feature_childLock:
+      type: object
+      description: The child lock configuration
+      properties:
+        properties:
+          $ref: '#/components/schemas/childLock_properties'
+        desiredProperties:
+          $ref: '#/components/schemas/childLock_properties'
+      title: Child lock
+    feature_childLock_actionoutput_output:
+      type: object
+      description: Contains information about the output of an executed action
+      properties:
+        delivered:
+          type: boolean
+          description: States whether the action has been delivered to the device
+          readOnly: false
+          title: Delivered
+          writeOnly: false
+        errorMessage:
+          type: string
+          description: In case of 'delivered' being 'false' this field can contain
+            additional information about the error
+          readOnly: false
+          title: Error message
+          writeOnly: false
+        errorDetails:
+          $ref: '#/components/schemas/top_property_errorDetails'
+      readOnly: true
+      title: output
+      writeOnly: false
+    battery_status_properties:
+      type: object
+      properties:
+        voltage:
+          type: number
+          description: The current voltage of the battery
+          readOnly: true
+          title: Voltage
+          writeOnly: false
+    battery_properties:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/battery_status_properties'
+    feature_battery:
+      type: object
+      description: The battery information of a device
+      properties:
+        properties:
+          $ref: '#/components/schemas/battery_properties'
+        desiredProperties:
+          $ref: '#/components/schemas/battery_properties'
+      title: Battery
+    top_property_batteryValues:
+      type: array
+      description: The battery values with corresponding times
+      items:
+        type: object
+        properties:
+          v:
+            type: number
+            description: The value of the battery
+            readOnly: false
+            title: Battery value
+            writeOnly: false
+          t:
+            type: string
+            format: date-time
+            description: The time of the recorded battery voltage
+            readOnly: false
+            title: Time
+            writeOnly: false
+        readOnly: false
+        writeOnly: false
+      readOnly: false
+      title: Battery values
+      writeOnly: false
+  parameters:
+    PathParamThingId:
+      name: thingId
+      in: path
+      description: |-
+        The ID of a thing needs to follow the namespaced entity ID notation
+        (see [Ditto documentation on namespaced entity IDs](https://www.eclipse.dev/ditto/basic-namespaces-and-names.html#namespaced-id))
+      required: true
+      schema:
+        type: string
+    QueryParamCondition:
+      name: condition
+      in: query
+      description: |-
+        Defines that the [request should be done conditionally](https://eclipse.dev/ditto/basic-conditional-requests.html)
+        only be processed if the given condition is met.
+        The condition can be specified using [RQL](https://eclipse.dev/ditto/basic-rql.html) syntax.
+
+        The `condition` can be passed for both, `GET` verb (conditional request) and modifying verbs (conditional update).
+
+        #### Examples
+        E.g. if the temperature is not 23.9 update it to 23.9:
+        * `?condition=ne(features/temperature/properties/value,23.9)`
+
+           `body: 23.9`
+      required: false
+      schema:
+        type: string
+    QueryParamFields:
+      name: fields
+      in: query
+      description: |-
+        Contains a comma-separated list of fields to be included in the returned JSON, performing a
+        [partial request](https://eclipse.dev/ditto/httpapi-concepts.html#with-field-selector).
+
+        #### Selectable fields
+
+        Supports selecting arbitrary sub-fields  by using a comma-separated list:
+          * several properties paths can be passed as a comma-separated list of JSON pointers (RFC-6901)
+
+            For example:
+              * `?fields=model` would select only `model` value (if present)
+              * `?fields=model,make` would select `model` and `make` values (if present)
+
+        Supports selecting arbitrary sub-fields of objects by wrapping sub-fields inside parentheses `( )`:
+          * a comma-separated list of sub-fields (a sub-field is a JSON pointer (RFC-6901) separated with `/`) to select
+          * sub-selectors can be used to request only specific sub-fields by placing expressions in parentheses `( )` after a selected subfield
+
+            For example:
+             * `?fields=location(longitude,latitude)` would select the `longitude` and `latitude` value inside the `location` object
+
+        #### Examples
+
+        * `?fields=model,make,location(longitude,latitude)`
+        * `?fields=listOfAddresses/postal(city,street))`
+      required: false
+      schema:
+        type: string
+  securitySchemes:
+    Bearer:
+      type: http
+      description: A JSON Web Token issued by a configured OpenID Connect Identity
+        Provider
+      name: Bearer
+      scheme: bearer
+      bearerFormat: JWT

@@ -16,15 +16,12 @@
     }
   ],
   "tm:optional": [
-    "/properties/id"
+    "/properties/id",
+    "/properties/location"
   ],
   "properties": {
     "id": {
-      "title": "Device ID",
-      "description": "The unique identifier of this device, only known after installation of device",
-      "type": "string",
-      "readOnly": true,
-      "pattern": "^[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}$"
+      "description": "The unique identifier of this device, only known after installation of device"
     },
     "serial": {
       "title": "Serial number",

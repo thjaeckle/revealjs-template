@@ -92,7 +92,7 @@
 			<section id="beyonnex-2" style="clear: both;">
 				<h3>submetering devices</h3>
 				<br>
-				<p>collect and allocate <b>heat consumption</b> of residents</p>
+				<p>collect and allocate <b>heat/water consumption</b> of residents</p>
 				<img src="./images/Heizkostenverteiler_035.jpg" style="width: 20%;margin:0;vertical-align: middle" alt="Heizkostenverteiler">
 				<img src="./images/noventic-IoT-Gateway_2-15.png" style="width: 35%;margin:0;vertical-align: middle" alt="Noventic IoT Gateway">
 				<img src="./images/verschraubungs-wasserzaehler-q-water-5-5-elektronisch-funk-qundis-aufputz-min.png" style="width: 25%;margin:0;vertical-align: middle" alt="Heizkostenverteiler">
@@ -100,7 +100,7 @@
 			<section id="beyonnex-3" style="clear: both;">
 				<h3>smart heating devices</h3>
 				<br>
-				<p>give residents more <b>control</b> over their heat consumption via App or manually</p>
+				<p>give residents more <b>control</b> over their <b>heat consumption</b> via App or manually</p>
 				<img src="./images/smart_radiator_thermostat_line_x_noventic_product_0986_20-2_00.png" style="width: 45%;margin:0;vertical-align: middle" alt="Smart Radiator Thermostat">
 				<img src="./images/kalo-smart-screenshot-1.png" class="fragment" style="width: 15%;margin:0;vertical-align: middle" alt="Kalo Smart App">
 			</section>
@@ -167,13 +167,19 @@
 			</section>
 			<section id="digital-twin-2" style="clear: both;">
 				<h3>a solution: Digital Twin</h3>
-				<!-- TODO TJ add graphic / image -->
-				<br/>
-				<ul style="font-size: 0.9em">
-					<li class="fragment">providing <b>APIs</b> for <b>accessing device data</b> and sending commands</li>
-					<li class="fragment" style="padding-top: 0.5em"><b>abstracting</b> from <b>protocols</b> devices are connected with</li>
-					<li class="fragment" style="padding-top: 0.5em">handling <b>access control</b> for various user groups</li>
-					<li class="fragment" style="padding-top: 0.5em">enabling <b>higher order twins</b> for rooms, apartments, buildings</li>
+				<div style="float: left; width: 60%">
+					<ul style="font-size: 0.8em">
+						<li class="fragment">providing <b>APIs</b> for <b>accessing device data</b> and sending commands</li>
+						<li class="fragment" style="padding-top: 0.5em"><b>abstracting</b> from <b>protocols</b> devices are connected with</li>
+						<li class="fragment" style="padding-top: 0.5em">handling <b>access control</b> for various user groups</li>
+						<li class="fragment" style="padding-top: 0.5em">enabling <b>higher order twins</b> for rooms, apartments, buildings</li>
+					</ul>
+				</div>
+				<div style="float: right; width: 40%">
+					<img src="./images/bing-digital-twins-as-virtual-representations-of-devices-like-thermostats-and-heat-cost-allocators-with-people-interacting-with-them-and-the-twins-providing-APIs.png" style="width: 95%;margin:0;vertical-align: middle" alt="Digital twins">
+					<small style="font-size: 0.4em">Generated with Microsoft Bing Copilot</small>
+				</div>
+				<ul style="font-size: 0.8em; clear: both">
 					<li class="fragment" style="padding-top: 0.5em">used by various different development teams as <b>IoT middleware</b></li>
 				</ul>
 			</section>
@@ -334,7 +340,7 @@ false
 				</div>
 			</section>
 			<section id="models-4" style="clear: both;">
-				<h3>model tooling: OpenAPI</h3>
+				<h3>model tooling: OpenAPI generation</h3>
 				<br>
 				<ul style="font-size: 0.8em">
 					<li><b>writing/enhancing</b> TMs <b>is hard</b></li>
@@ -347,13 +353,18 @@ false
 						</ul>
 					</li>
 				</ul>
-				<!-- TODO TJ screenshot of the MR comment?? or of the Swagger-UI? -->
+				<!-- TODO TJ screenshot of the MR comment?? -->
+			</section>
+			<section id="models-4a" style="clear: both;">
+				<h3>serving generated OpenAPI in Swagger-UI</h3>
+				<img src="./images/swagger-ui-screenshot-1.png" style="width: 50%;float: left" alt="SwaggerUI screenshot">
+				<img src="./images/swagger-ui-screenshot-3.png" style="width: 50%;float: right" alt="SwaggerUI screenshot 2">
 			</section>
 			<section id="models-5" style="clear: both;">
 				<h3>model tooling: code generation</h3>
 				<br>
 				<ul style="font-size: 0.8em">
-					<li>before using WoT TMs, we had challenges to keep our things "consistent"</li>
+					<li>before using WoT TMs and tooling around it, we had <b>challenges</b> to keep our <b>things "consistent"</b></li>
 					<li class="fragment" style="padding-top: 0.5em">e.g. often data classes were manually written, typos and wrong data types were happening often</li>
 					<li class="fragment" style="padding-top: 0.5em">so we created some <b>tooling to help our development</b> teams
 					<ul>
@@ -364,6 +375,17 @@ false
 					</li>
 				</ul>
 				<!-- TODO TJ screenshot of Kotlin DSL, providing Thermostat data -->
+				<!-- or even live demo?? would be awesome if it works -->
+			</section>
+			<section id="models-6" style="clear: both;">
+				<h3>model tooling: model migration</h3>
+				<br>
+				<ul style="font-size: 0.9em">
+					<li>our newest tool</li>
+					<li class="fragment" style="padding-top: 0.5em"><b>evolving a Thing</b> over time with <b>new capabilities</b></li>
+					<li class="fragment" style="padding-top: 0.5em">providing tooling in order to <b>migrate</b> (as in a DB migration)
+						<b>Things</b> from one referenced TM version to the next increment in Ditto, <b>patching</b> the "delta" into the things</li>
+				</ul>
 			</section>
 		</section>
 
