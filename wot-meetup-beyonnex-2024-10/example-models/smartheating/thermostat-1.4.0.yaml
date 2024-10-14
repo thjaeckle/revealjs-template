@@ -4,8 +4,8 @@ info:
   description: The smart Thermostat with all of its supported capabilities
   version: 1.4.0
 servers:
-- url: https://ditto.eclipseprojects.io/api/2/things
-  description: "Ditto: Sandbox"
+- url: https://ditto.develop.beyonnex.org/api/2/things
+  description: "Ditto: DEV @beyonnex.io"
 security:
 - Bearer: []
 tags:
@@ -202,7 +202,7 @@ paths:
     get:
       tags:
       - Attributes
-      summary: Retrieves the 'Device ID'
+      summary: Retrieves the 'ID'
       description: "The unique identifier of this device, only known after installation\
         \ of device"
       parameters:
@@ -220,7 +220,7 @@ paths:
                   \ installation of device"
                 pattern: "^[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}$"
                 readOnly: true
-                title: Device ID
+                title: ID
                 writeOnly: false
         "400":
           description: "The request at 'attributes/id' failed due to bad input, check\
@@ -1135,7 +1135,7 @@ components:
             \ of device"
           pattern: "^[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}$"
           readOnly: true
-          title: Device ID
+          title: ID
           writeOnly: false
         location:
           $ref: '#/components/schemas/attribute_location'

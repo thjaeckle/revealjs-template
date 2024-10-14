@@ -20,21 +20,28 @@
 
 	<link rel="stylesheet" href="../reveal.js/dist/reset.css">
 	<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
-	<!--		<link rel="stylesheet" href="../reveal.js/dist/theme/league.css">-->
-	<link rel="stylesheet" href="../reveal.js/dist/theme/white.css">
+<!--			<link rel="stylesheet" href="../reveal.js/dist/theme/league.css">-->
+	<link rel="stylesheet" href="../reveal.js/dist/theme/solarized.css">
 	<link rel="stylesheet" href="../css/custom.css">
 
 	<!-- Theme used for syntax highlighted code -->
 	<link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css">
+
+	<style>
+		:root {
+			--r-background-color: #b3fdee;
+			--r-main-color: #45525a;
+			--r-heading-color: #313840;
+		}
+	</style>
 </head>
 <body>
 <div class="reveal">
 	<div class="slides">
 		<section>
-			<section id="title" class="new-chapter" data-background="./images/ditto_symbolonly.svg" data-background-size="40%" data-state="chapter-background">
+			<section id="title" class="new-chapter" data-state="chapter-background">
 				<h1 style="font-size: 1.8em">WoT CG Meetup 2024-10-14</h1>
-				<br/>
-				<h2>using <img src="./images/wot-logo-large-blue.svg" style="width: 15%;vertical-align: middle" alt="Web of Things"> Thing Models</h2>
+				<h2 style="padding-top: 0.3em">using <img src="./images/wot-logo-large-blue.svg" style="width: 15%;vertical-align: middle" alt="Web of Things"> Thing Models</h2>
 				<h3> as a basis to make to housing sector smart and energy-efficient</h3>
 				<hr />
 				<div>
@@ -48,8 +55,41 @@
 		</section>
 
 		<!-- Section: About -->
+<!--		<section style="clear: both;">-->
+<!--&lt;!&ndash;			<section>&ndash;&gt;-->
+<!--&lt;!&ndash;				<h1>about</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;			</section>&ndash;&gt;-->
+<!--			<section id="about-beyonnex" class="new-chapter" data-state="chapter-background">-->
+<!--				<h3>about <img src="./images/beyonnex-name-rgb.png" style="width: 40%;margin:0;vertical-align: middle" alt="beyonnex.io logo"/></h3>-->
+<!--				<ul style="font-size: 0.9em">-->
+<!--					<li>digitizing <b>real estate</b> / the housing sector</li>-->
+<!--					<li class="fragment" style="padding-top: 0.8em">young <b>IoT startup</b> (< 3 years)</li>-->
+<!--					<li class="fragment" style="padding-top: 0.8em">part of the <b>Noventic group</b></li>-->
+<!--					<li class="fragment" style="padding-top: 0.8em">connecting different types of devices to our own IoT backend</li>-->
+<!--					<li class="fragment" style="padding-top: 0.8em">HQ: Hamburg, Germany - employees (>100) all over Europe</li>-->
+<!--				</ul>-->
+<!--			</section>-->
+<!--			<section id="about-me" class="new-chapter" data-state="chapter-background">-->
+<!--				<h3>about me</h3>-->
+<!--				<div style="text-align: left; float: left; width: 65%; font-size: 0.9em">-->
+<!--					<ul>-->
+<!--						<li>Software Engineer</li>-->
+<!--						<li class="fragment" data-fragment-index="1" style="padding-top: 0.8em">Lead of IoT Foundation @beyonnex.io</li>-->
+<!--						<li class="fragment" data-fragment-index="2" style="padding-top: 0.8em">formerly invited expert and participating for Bosch in WoT WG</li>-->
+<!--						<li class="fragment" data-fragment-index="3" style="padding-top: 0.8em">project lead and main committer of <a href="https://eclipse.dev/ditto">Eclipse Ditto™</a>, an IoT middleware and digital twin framework</li>-->
+<!--					</ul>-->
+<!--				</div>-->
+<!--				<div style="text-align: left; float: right; width: 35%">-->
+<!--					<img src="./images/thomas-jaeckle-quadratic-800.jpeg" style="width: 80%; margin-left: auto; margin-right: auto; display:block" alt="Thomas Jäckle">-->
+<!--					<img class="fragment" data-fragment-index="3" src="./images/ditto.svg" style="width: 50%; margin-left: auto; margin-right: auto; margin-top: 1em; display:block" alt="Eclipse Ditto logo">-->
+<!--				</div>-->
+<!--			</section>-->
+<!--		</section>-->
+
+
+		<!-- Section: Beyonnex mission -->
 		<section style="clear: both;">
-			<section id="about-beyonnex" class="new-chapter" data-state="chapter-background">
+			<section id="beyonnex" class="new-chapter" data-state="chapter-background">
 				<h3>about <img src="./images/beyonnex-name-rgb.png" style="width: 40%;margin:0;vertical-align: middle" alt="beyonnex.io logo"/></h3>
 				<ul style="font-size: 0.9em">
 					<li>digitizing <b>real estate</b> / the housing sector</li>
@@ -59,26 +99,6 @@
 					<li class="fragment" style="padding-top: 0.8em">HQ: Hamburg, Germany - employees (>100) all over Europe</li>
 				</ul>
 			</section>
-			<section id="about-me" class="new-chapter" data-state="chapter-background">
-				<h3>about me</h3>
-				<div style="text-align: left; float: left; width: 65%; font-size: 0.9em">
-					<ul>
-						<li>Software Engineer</li>
-						<li class="fragment" data-fragment-index="1" style="padding-top: 0.8em">Lead of IoT Foundation @beyonnex.io</li>
-						<li class="fragment" data-fragment-index="2" style="padding-top: 0.8em">formerly invited expert and participating for Bosch in WoT WG</li>
-						<li class="fragment" data-fragment-index="3" style="padding-top: 0.8em">project lead and main committer of <a href="https://eclipse.dev/ditto">Eclipse Ditto™</a>, an IoT middleware and digital twin framework</li>
-					</ul>
-				</div>
-				<div style="text-align: left; float: right; width: 35%">
-					<img src="./images/thomas-jaeckle-quadratic-800.jpeg" style="width: 80%; margin-left: auto; margin-right: auto; display:block" alt="Thomas Jäckle">
-					<img class="fragment" data-fragment-index="3" src="./images/ditto.svg" style="width: 50%; margin-left: auto; margin-right: auto; margin-top: 1em; display:block" alt="Eclipse Ditto logo">
-				</div>
-			</section>
-		</section>
-
-
-		<!-- Section: Beyonnex mission -->
-		<section style="clear: both;">
 			<section id="beyonnex-1" style="clear: both;">
 				<img src="./images/beyonnex-name-rgb.png" style="width: 40%;margin:0;vertical-align: middle" alt="beyonnex.io logo"/>
 				<br>
@@ -125,7 +145,7 @@
 						</li>
 					</div>
 				</ul>
-				<h4 class="fragment" data-fragment-index="4" style="clear: both; padding-top: 0.9em">-> our devices are most of the time offline</h4>
+				<h4 class="fragment" data-fragment-index="4" style="clear: both; padding-top: 0.9em">our devices are most of the time offline</h4>
 			</section>
 			<section id="beyonnex-5" style="clear: both;">
 				<h3>device environment</h3>
@@ -150,17 +170,21 @@
 
 		<!-- Section: Digital Twin -->
 		<section style="clear: both;">
+			<section id="digital-twin" style="clear: both;">
+				<h1>digital twin</h1>
+				<p>more than just a buzzword</p>
+			</section>
 			<section id="digital-twin-1" style="clear: both;">
 				<h3>special challenges to solve</h3>
 				<!-- TODO TJ add graphic / image -->
 				<ul style="font-size: 0.9em">
-					<li>heterogeneous device types</li>
-					<li class="fragment" style="padding-top: 0.5em">devices mostly offline</li>
-					<li class="fragment" style="padding-top: 0.5em">different user groups (e.g. residents, installers, operators/supporters)</li>
-					<li class="fragment" style="padding-top: 0.5em">multiple development teams
+					<li><b>heterogeneous device</b> types</li>
+					<li class="fragment" style="padding-top: 0.5em">devices mostly <b>offline</b></li>
+					<li class="fragment" style="padding-top: 0.5em">various <b>user groups</b> (e.g. residents, installers, operators/supporters)</li>
+					<li class="fragment" style="padding-top: 0.5em"><b>multiple development teams</b>
 						<ul>
 							<li class="fragment">either connecting "their" device types</li>
-							<li class="fragment">or using device functionality (e.g. for mobile apps or operator/support dashboards)</li>
+							<li class="fragment">or "just" using device functionality (e.g. for mobile apps or operator/support dashboards)</li>
 						</ul>
 					</li>
 				</ul>
@@ -188,11 +212,15 @@
 
 		<!-- Section: Ditto -->
 		<section style="clear: both;">
-			<section id="ditto-1" style="clear: both;">
-				<h3>Eclipse Ditto in a nutshell</h3>
-				<br/>
-				<img src="./images/ditto-super-1.png" alt="Ditto supergraphic">
+			<section id="ditto">
+				<h1>Eclipse Ditto</h1>
+				<p>our preferred digital twin solution</p>
 			</section>
+<!--			<section id="ditto-1" style="clear: both;">-->
+<!--				<h3>Eclipse Ditto in a nutshell</h3>-->
+<!--				<br/>-->
+<!--				<img src="./images/ditto-super-1.png" alt="Ditto supergraphic">-->
+<!--			</section>-->
 			<section id="ditto-2" style="clear: both;">
 				<h3>Eclipse Ditto in context</h3>
 				<div style="text-align: left; float: left; width: 65%">
@@ -206,7 +234,7 @@
 				<h3>device data as APIs</h3>
 				<div style="text-align: left; float: left; width: 35%">
                 <pre style="width: 100%; font-size: 0.45em;"><code class="hljs json">{
-  "thingId": "io.beyonnex.srt:my-srt",
+  "thingId": "io.beyonnex.thermostat:my-t1",
   "policyId": "io.beyonnex.room:my-room",
   "attributes": {
     "serial": "4711-0815",
@@ -225,19 +253,19 @@
 					<p style="text-align: center">JSON repr. of a Thing</p>
 				</div>
 				<div style="text-align: left; float: right; width: 64%" class="fragment">
-                    <pre style="width: 105%; font-size: 0.45em;"><code class="hljs text">GET/PUT/PATCH/DELETE /things/io.beyonnex.srt:my-srt
- /things/io.beyonnex.srt:my-srt/thingId
- /things/io.beyonnex.srt:my-srt/policyId
- /things/io.beyonnex.srt:my-srt/attributes
- /things/io.beyonnex.srt:my-srt/attributes/serial
- /things/io.beyonnex.srt:my-srt/attributes/location
- /things/io.beyonnex.srt:my-srt/attributes/location/buildingId
+                    <pre style="width: 105%; font-size: 0.45em;"><code class="hljs text">GET/PUT/PATCH/DELETE /things/io.beyonnex.thermostat:my-t1
+ /things/io.beyonnex.thermostat:my-t1/thingId
+ /things/io.beyonnex.thermostat:my-t1/policyId
+ /things/io.beyonnex.thermostat:my-t1/attributes
+ /things/io.beyonnex.thermostat:my-t1/attributes/serial
+ /things/io.beyonnex.thermostat:my-t1/attributes/location
+ /things/io.beyonnex.thermostat:my-t1/attributes/location/buildingId
 
 
- /things/io.beyonnex.srt:my-srt/features
- /things/io.beyonnex.srt:my-srt/features/temp
- /things/io.beyonnex.srt:my-srt/features/temp/properties
- /things/io.beyonnex.srt:my-srt/features/temp/properties/value
+ /things/io.beyonnex.thermostat:my-t1/features
+ /things/io.beyonnex.thermostat:my-t1/features/temp
+ /things/io.beyonnex.thermostat:my-t1/features/temp/properties
+ /things/io.beyonnex.thermostat:my-t1/features/temp/properties/value
 
 
 
@@ -254,7 +282,7 @@
 				</div>
 				<div style="text-align: left; float: right; width: 55%">
                 <pre style="width: 100%; font-size: 0.45em;"><code class="hljs json">{
-  "thingId": "io.beyonnex.srt:my-srt",
+  "thingId": "io.beyonnex.thermostat:my-t1",
   "definition": "https://models.some.domain.org/thermostat-1.2.0.tm.jsonld"
 }</code></pre>
 				</div>
@@ -298,7 +326,11 @@ false
 
 		<!-- Section: Models -->
 		<section style="clear: both;">
-			<section id="models-1" style="clear: both;">
+			<section id="models">
+				<h1>models</h1>
+				<p>WoT TMs ensure that (API) contracts are defined and met</p>
+			</section>
+			<section id="models-1">
 				<h3>Thing Models and how we use them</h3>
 				<br/>
 				<ul style="font-size: 0.8em">
@@ -307,7 +339,7 @@ false
 						<b>and</b> composition (<code style="font-size: 0.7em; background-color: lightgray">tm:submodel</code>),
 						applying "object-oriented" modeling, e.g.:
 						<ul>
-							<li class="fragment" style="padding-top: 0.5em">a thermostat <b>is-a</b> device, a device <b>is</b> aware of its location</li>
+							<li class="fragment" style="padding-top: 0.5em">a thermostat <b>is-a</b> device, a device <b>is</b> aware of its identity</li>
 							<li class="fragment" style="padding-top: 0.5em">a thermostat <b>has-a</b> functionality regarding temperature control, child lock and battery usage</li>
 							<li class="fragment" style="padding-top: 0.5em">a room as well <b>has-a</b> functionality regarding temperature control (but not child lock and battery usage)</li>
 						</ul>
@@ -334,12 +366,20 @@ false
 					<ul style="font-size: 0.8em">
 						<li class="fragment">commit and push TMs to version control (<b>Git</b>)</li>
 						<li class="fragment">CI/CD pipeline automatically <b>publishes TMs</b> to a "development" <b>website</b></li>
-						<li class="fragment"><b>Git tags</b> to <b>release TMs</b></li>
+						<li class="fragment">creating <b>Git tags</b> to <b>release TMs</b></li>
 						<li class="fragment">released TMs are deployed to a QA and productive website</li>
 					</ul>
 				</div>
 			</section>
-			<section id="models-4" style="clear: both;">
+		</section>
+
+		<!-- Section: Model tooling -->
+		<section style="clear: both;">
+			<section id="model-tooling" style="clear: both;">
+				<h1>model tooling</h1>
+				<p>WoT TMs are great, and we invest in building a tooling ecosystem around them</p>
+			</section>
+			<section id="model-tooling-1" style="clear: both;">
 				<h3>model tooling: OpenAPI generation</h3>
 				<br>
 				<ul style="font-size: 0.8em">
@@ -347,15 +387,14 @@ false
 					<li class="fragment" style="padding-top: 0.5em"><b>reading TMs also</b> needs quite some understanding</li>
 					<li class="fragment" style="padding-top: 0.5em">so we created some <b>tooling to help our development</b> teams
 						<ul>
-							<li class="fragment" style="padding-top: 0.5em"><b>generating OpenAPI definition</b> for complete Ditto <b>Things</b> based on TM and Ditto "translation"</li>
+							<li class="fragment" style="padding-top: 0.5em"><b>generating OpenAPI definition</b> for complete Ditto <b>Things</b> based on TM and Ditto endpoints</li>
 							<li class="fragment" style="padding-top: 0.5em">during that step <b>ensuring</b> that WoT TM can be parsed</li>
 							<li class="fragment" style="padding-top: 0.5em">doing that <b>automatically for merge requests</b></li>
 						</ul>
 					</li>
 				</ul>
-				<!-- TODO TJ screenshot of the MR comment?? -->
 			</section>
-			<section id="models-4a" style="clear: both;">
+			<section id="model-tooling-2" style="clear: both;">
 				<h3>serving generated OpenAPI in Swagger-UI</h3>
 				<img src="./images/swagger-ui-screenshot-1.png" style="width: 50%;float: left" alt="SwaggerUI screenshot">
 				<img src="./images/swagger-ui-screenshot-3.png" style="width: 50%;float: right" alt="SwaggerUI screenshot 2">
@@ -374,22 +413,53 @@ false
 					</ul>
 					</li>
 				</ul>
-				<!-- TODO TJ screenshot of Kotlin DSL, providing Thermostat data -->
-				<!-- or even live demo?? would be awesome if it works -->
 			</section>
-			<section id="models-6" style="clear: both;">
+			<section id="model-tooling-3" style="clear: both;">
+				<h3>generated Kotlin code</h3>
+				<br>
+				<img src="./images/generated-kotlin-code-1.png" style="width: 50%;float: left" alt="Generated Kotlin class">
+				<img class="fragment" src="./images/generated-kotlin-code-dsl.png" style="width: 40%;float: right" alt="Generated Kotlin DSL">
+			</section>
+			<section id="model-tooling-4" style="clear: both;">
 				<h3>model tooling: model migration</h3>
 				<br>
 				<ul style="font-size: 0.9em">
 					<li>our newest tool</li>
-					<li class="fragment" style="padding-top: 0.5em"><b>evolving a Thing</b> over time with <b>new capabilities</b></li>
+					<li class="fragment" style="padding-top: 0.5em"><b>evolving Things</b> over time with <b>new capabilities</b></li>
 					<li class="fragment" style="padding-top: 0.5em">providing tooling in order to <b>migrate</b> (as in a DB migration)
 						<b>Things</b> from one referenced TM version to the next increment in Ditto, <b>patching</b> the "delta" into the things</li>
 				</ul>
 			</section>
+			<section id="model-tooling-5" style="clear: both;">
+				<h3>migration tool in action</h3>
+				<img src="./images/model-migration-tool-screenshot-1.png" style="width: 70%;" alt="Model migration tool">
+			</section>
+			<section id="model-tooling-6" style="clear: both;">
+				<h3>diff tool in action</h3>
+				<img src="./images/model-migration-diff-tool-screenshot-1.png" style="width: 10%;float: left" alt="Diff tool form">
+				<img src="./images/model-migration-diff-tool-screenshot-2.png" style="width: 85%;float: right" alt="Diff tool output">
+			</section>
 		</section>
 
-
+		<!-- Section: Wrapping up -->
+		<section style="clear: both;">
+			<section id="wrapping-up-1" style="clear: both;">
+				<h1>wrapping up</h1>
+				<ul style="font-size: 0.9em">
+					<li>we mainly use WoT <b>Thing Models</b></li>
+					<li class="fragment" style="padding-top:0.5em">Ditto can now <b>ensure changes</b> to the twin always <b>adhere to the TM</b></li>
+					<li class="fragment" style="padding-top:0.5em">Ditto <b>generates Thing Descriptions</b> to be prepared for future integrations, e.g. API description for partners</li>
+					<li class="fragment" style="padding-top:0.5em">we continue to <b>invest in tooling</b> around <b>TMs</b> and Ditto integration</li>
+					<li class="fragment" style="padding-top:0.5em">we <b>aim</b> to make the generic <b>tooling</b> around <b>Ditto and TMs OSS</b></li>
+				</ul>
+			</section>
+			<section id="wrapping-up-2" style="clear: both;">
+				<p>thank you for attending and your interest</p>
+				<br/>
+				<br/>
+				<h1>Q & A</h1>
+			</section>
+		</section>
 	</div>
 </div>
 
